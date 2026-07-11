@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+    <title>Shaifullah & Suraya</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="mobile-container">
+        
+    
+        <section class="screen" id="home">
+
+            <h2 class="title">Undangan Raja Sehari</h2>
+            <div class="monogram"><img src="img/initial logo.png" alt="Initial Logo">
+            </div>
+            <p class="verse">"وَخَلَقۡنَٰكُمۡ أَزۡوَٰجٗا"<br>"And We created you in pairs"<br>-Surah An-Naba 78:8-</p>
+            <h1 class="names">Shaifullah Ahmad<br>&<br>Suraya Zulkifli</h1>
+            <a href="#details" class="btn">Buka Undangan</a>
+            
+        </section>
+        
+
+        <section class="screen" id="details">
+            <h2 class="title">Butiran Majlis</h2>
+
+             <div class="toggle-container">
+            <button class="toggle-btn active" onclick="switchEvent('perempuan')">Bersanding</button>
+            <button class="toggle-btn" onclick="switchEvent('lelaki')">Bertandang</button>
+            </div>
+            
+            <div class="countdown-grid">
+                <div class="countdown-box"><div class="countdown-num" id="days">00</div><div class="countdown-label">Days</div></div>
+                <div class="countdown-box"><div class="countdown-num" id="hours">00</div><div class="countdown-label">Hrs</div></div>
+                <div class="countdown-box"><div class="countdown-num" id="mins">00</div><div class="countdown-label">Min</div></div>
+                <div class="countdown-box"><div class="countdown-num" id="secs">00</div><div class="countdown-label">Sec</div></div>
+            </div>
+
+            <!-- Dynamic Info Cards -->
+            <div class="info-card" id="event-info">
+                <!-- Content injected programmatically by JavaScript -->
+            </div>
+        
+                <div class="map-button-group">
+                    <a href="#" id="go-maps" target="_blank" class="map-btn btn-google" >🚗 G-MAPS</a>
+                    <a href="#" id="go-waze" target="_blank" class="map-btn btn-waze">🎯 WAZE</a>
+                </div>
+       </section>
+
+
+
+
+    </div>
+
+<nav class="bottom-nav">
+        <a href="#home" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Utama</span>
+        </a>
+        <a href="#rsvp" class="nav-item">
+            <span class="nav-icon">✍️</span>
+            <span>RSVP</span>
+        </a> 
+        
+        <!-- Center Music Anchor Toggle[cite: 1] -->
+        <div class="nav-item" onclick="toggleMusic()">
+            <div class="music-toggle" id="musicBtn"></div>
+            <span style="font-size: 11px; margin-top: 2px;">Muzik</span>
+        </div>
+        
+      <a href="#details" class="nav-item">
+            <span class="nav-icon">📅</span>
+            <span>Majlis</span>
+        </a>
+
+       <a href="javascript:void(0)" class="nav-item" onclick="openContactModal()">
+    <span class="nav-icon">📞</span>
+    <span>Hubungi</span>
+</a>
+    </nav>
+<div id="contactModal" class="modal-overlay" onclick="closeContactModal(event)">
+    <div class="modal-content">
+        <button class="close-btn" onclick="toggleModal(false)">&times;</button>
+        
+        <!-- Tab Headers -->
+        <div class="modal-tabs">
+            <button id="tab1" class="tab-btn active" onclick="switchContactTab(0)">Pihak Perempuan</button>
+            <button id="tab2" class="tab-btn" onclick="switchContactTab(1)">Pihak Lelaki</button>
+        </div>
+
+        <!-- Swipeable/Slidable Container -->
+        <div class="slider-viewport">
+            <div id="sliderTrack" class="slider-track">
+                <div id="contact-list-1" class="slide-page"><!-- Populated by JS --></div>
+                <div id="contact-list-2" class="slide-page"><!-- Populated by JS --></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ <script>
+
+    // 1. Unified Data Object
+const globalData = {
+    contacts1: [
+        { name: "Pn. Normizah", phone: "0129543925" },
+        { name: "En. Asmawi", phone: "0126641202" },
+        { name: "Pn. Norhasliza", phone: "0163670277" }
+    ],
+    contacts2: [
+        { name: "En. Sharafae", phone: "0193044161" },
+        { name: "Pn. Jamelah", phone: "01111059133" },
+        { name: "Amirul", phone: "0164064161" }
+    ]
+};
+
+// 2. Helper function to generate list HTML
+function generateContactList(contacts) {
+    let html = '';
+    contacts.forEach(c => {
+        const cleanPhone = c.phone.replace(/\s+/g, '');
+        const waPhone = cleanPhone.startsWith('6') ? cleanPhone : `6${cleanPhone}`;
+        
+        html += `
+            <div class="contact-row">
+                <span class="contact-name">${c.name}</span>
+                <div class="contact-actions">
+                    <a href="tel:${cleanPhone}">Call</a>
+                    <a href="https://wa.me/${waPhone}" target="_blank">WhatsApp</a>
+                </div>
+            </div>
+        `;
+    });
+    return html;
+}
+
+// 3. Populate elements on script load
+document.getElementById('contact-list-1').innerHTML = generateContactList(globalData.contacts1);
+document.getElementById('contact-list-2').innerHTML = generateContactList(globalData.contacts2);
+
+// 4. Modal Interface State Controls
+let currentTabIdx = 0;
+
+function openContactModal() {
+    document.getElementById("contactModal").style.display = "flex";
+    switchContactTab(0); // Start at page 1 by default
+}
+
+function closeContactModal(event) {
+    // If user clicks close-btn or outer backdrop overlay, close modal
+    if (event.target.classList.contains('modal-overlay') || event.type === 'click' && event.target.className === 'close-btn') {
+        document.getElementById("contactModal").style.display = "none";
+    }
+}
+
+function switchContactTab(index) {
+    currentTabIdx = index;
+    const track = document.getElementById("sliderTrack");
+    const t1 = document.getElementById("tab1");
+    const t2 = document.getElementById("tab2");
+
+    if (index === 0) {
+        track.style.transform = "translateX(0%)";
+        t1.classList.add("active");
+        t2.classList.remove("active");
+    } else {
+        track.style.transform = "translateX(-50%)"; // Shift to see page 2
+        t2.classList.add("active");
+        t1.classList.remove("active");
+    }
+}
+
+// 5. Native Touch Swipe Detection Logic
+let touchStartX = 0;
+let touchEndX = 0;
+const sliderViewport = document.querySelector('.slider-viewport');
+
+sliderViewport.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+sliderViewport.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+}, { passive: true });
+
+function handleSwipeGesture() {
+    const swipeThreshold = 50; // minimum distance in pixels to count as a swipe
+    if (touchStartX - touchEndX > swipeThreshold) {
+        // Swiped Left -> View next page (Pihak Lelaki)
+        switchContactTab(1);
+    }
+    if (touchEndX - touchStartX > swipeThreshold) {
+        // Swiped Right -> View previous page (Pihak Perempuan)
+        switchContactTab(0);
+    }
+}
+// Data derived cleanly from the wedding invitation card[cite: 1]
+const weddingData = {
+    perempuan: {
+        targetDate: "2026-08-29T12:00:00", //[cite: 1]
+        dateStr: "Sabtu, 29 Ogos 2026", //[cite: 1]
+        hijriStr: "16 Rabiulawal 1448", //[cite: 1]
+        timeStr: "12:00 PM - 5:00 PM (Bersanding: 1:00 PM)", //[cite: 1]
+        venue: "LOT 525, Kg Pohon Buloh, Pasir Mas, Kelantan.", //[cite: 1]
+        mapsUrl: "https://maps.app.goo.gl/K8B81AwwJ2ubPX6b9", //[cite: 1]
+        wazeUrl: "https://waze.com/ul?q=LOT+525+Kg+Pohon+Buloh+Pasir+Mas+Kelantan", //[cite: 1]
+    },
+    lelaki: {
+        targetDate: "2026-10-24T11:00:00", //[cite: 1]
+        dateStr: "Sabtu, 24 Okt 2026", //[cite: 1]
+        hijriStr: "13 Jamadilawal 1448", //[cite: 1]
+        timeStr: "11:00 AM - 4:30 PM (Bersanding: 11:15 AM)", //[cite: 1]
+        venue: "Bagan Serai Wedding Hall, Bagan Serai, Perak.", //[cite: 1]
+        mapsUrl: "https://maps.app.goo.gl/G7q1YJeRBPmo55dL8", //[cite: 1]
+        wazeUrl: "https://waze.com/ul?q=Bagan+Serai+Wedding+Hall+Perak", //[cite: 1]
+    }
+};
+
+let currentSide = 'perempuan';
+let countdownInterval;
+
+function switchEvent(side) {
+    currentSide = side;
+    
+    // Toggle active status UI on side switcher buttons
+    document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+    const index = side === 'perempuan' ? 0 : 1;
+    document.querySelectorAll('.toggle-btn')[index].classList.add('active');
+    
+    // Update Information Display Panel
+    const data = weddingData[side];
+    document.getElementById('event-info').innerHTML = `
+        <div class="info-label">Tarikh Majlis</div>
+        <div class="info-value">${data.dateStr}<br><span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">${data.hijriStr}</span></div>
+        <div class="info-label">Aturcara Majlis</div>
+        <div class="info-value">${data.timeStr}</div>
+        <div class="info-label">Lokasi</div>
+        <div class="info-value">${data.venue}</div>
+    `;
+
+    // Update Maps Section Layout Strings & Links
+    document.getElementById('go-maps').href = data.mapsUrl;
+    document.getElementById('go-waze').href = data.wazeUrl;
+
+    // Render Contact Panel Directory
+   
+
+    // Reset and restart countdown clocks matching event selection
+    clearInterval(countdownInterval);
+    startCountdown(data.targetDate);
+}
+
+function startCountdown(dateString) {
+    const targetTime = new Date(dateString).getTime();
+
+    function updateTimer() {
+        const now = new Date().getTime();
+        const difference = targetTime - now;
+
+        if (difference <= 0) {
+            document.getElementById('days').innerText = "00";
+            document.getElementById('hours').innerText = "00";
+            document.getElementById('mins').innerText = "00";
+            document.getElementById('secs').innerText = "00";
+            clearInterval(countdownInterval);
+            return;
+        }
+
+        const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+        document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+        document.getElementById('mins').innerText = m < 10 ? '0' + m : m;
+        document.getElementById('secs').innerText = s < 10 ? '0' + s : s;
+    }
+
+    updateTimer();
+    countdownInterval = setInterval(updateTimer, 1000);
+}
+
+// Initialize layout configurations on mount
+switchEvent('perempuan');
+    </script>
+</body>
+</html>
