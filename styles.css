@@ -756,11 +756,3 @@ label {
     margin-top: 15px;
 }
 
-body, .mobile-container {
-    /* Allows normal vertical scrolling, but blocks pinch-to-zoom and double-tap zooming */
-    touch-action: pan-y; 
-    
-    /* Disables text size adjustments when switching device orientations */
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-}
