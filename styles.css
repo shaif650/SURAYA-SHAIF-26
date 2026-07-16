@@ -1,29 +1,70 @@
-* {
+/* ==========================================================================
+   1. GLOBAL RESET & MOBILE TOUCH DEFAULTS
+   ========================================================================== */
+
+
+:root {
+    --bg-primary: #faf8f5;
+    --bg-card: #ffffff;
+    --accent-color: #c5a880; /* Elegant soft gold */
+    --accent-dark: #a3875e;
+    --text-main: #333333;
+    --text-muted: #777777;
+    --text-light: #ffffff;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 15px rgba(197, 168, 128, 0.2);
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.btn, .nav-icon, .btn-google, .btn-waze, .close-btn, .a, .contact-actions, 
+.nav-item, .nav-item2, .tab-btn, .toggle-btn, input[type="submit"], [role="button"] {
+    -webkit-tap-highlight-color: transparent ;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) ;
+    -webkit-touch-callout: none ; 
+}
+
+/* ==========================================================================
+   2. BODY & LAYOUT CONTAINERS
+   ========================================================================== */
 body {
-    background-color: #e2e8f0;    /* Backdrop frame color for desktop views */
+    background-color: #e2e8f0;    
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
+body.locked {
+    overflow: hidden ;
+}
+
+body.locked .mobile-container {
+    overflow-y: hidden ;
+}
+
 .mobile-container {
     width: 100%;
-    max-width: 450px;
-    height: 100vh;
+    max-width: 480px;
+    min-height: 100vh;
     max-height: 920px;
     background-image: url('img/bgfull.png');
     background-size: cover;
-    overflow-y: auto;
+    background-position: center top;
+    background-repeat: no-repeat;
     position: relative;
     box-shadow: 0 12px 40px rgba(0,0,0,0.25);
     scroll-behavior: smooth;
+    padding-bottom: 90px;
+
+    /* FLUID RATIO SCALE EMULATION: Converts wrapper into a design container anchor */
+    container-type: inline-size;
+    container-name: app-wrapper;
 }
 
 /* Modern minimalist scrollbar */
@@ -35,390 +76,546 @@ body {
     border-radius: 4px;
 }
 
-.screen {
-    min-height: 100%;
-    width: 100%;
-    padding: 45px 24px;
+/* ==========================================================================
+   3. SCREEN & ANIMATION CONTROLS (Updated for Bottom Nav Padding)
+   ========================================================================== */
+.screen, .screen2, .screen1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    /* Strict viewport constraint minus the height of the bottom nav */
+    height: calc(100vh - 80px); 
+    max-height: 840px; /* 920px max - 80px nav height */
+    padding: 40px 24px;
     text-align: center;
     position: relative;
+    box-sizing: border-box;
+    overflow: hidden; 
+    will-change: transform, opacity;
+    background-color: #f8fcff;
+    z-index: 10;
+    
+
+
 }
 
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUpEffect 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: calc(var(--delay, 0) * 0.15s);
+}
 
-.monogram{
-    width: 180px;
-    height: 180px;
+@keyframes fadeInUpEffect {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#undagan #details {
+    display: none;
+}
+
+.bottom-nav {
+    border-radius: 30px 30px 0 0;
+    position: fixed;
+    bottom: 0;
+    
+    /* Strict Width Controls: Ensures it locks inside the 450px boundary */
+    width: 100vw;          
+    max-width: 450px;       
+    left: 50vw;
+    transform: translateX(-50%) translateY(150%); /* Centered horizontally, hidden vertically */
+    
+    height: 80px;
+    background-color: #e2e8f0e3;
+    opacity: 0.85;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.6s ease-in-out;
+    z-index: 10;
+}
+
+/* Updated selector to preserve horizontal centering when revealed */
+body.revealed #undangan {
+    display: block; 
+}
+body.revealed .bottom-nav {
+    transform: translateX(-50%) translateY(0); 
+}
+/* ==========================================================================
+   4. TYPOGRAPHY & ELEMENTS
+   ========================================================================== */
+.monogram {
+    width: 160px;
+    height: 160px;
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+.monogram img {
+    max-width: 100%;
+    height: auto;
 }
 
 .title {
-    font-size: 18px;
-    letter-spacing: 4px;
+    font-size: 16px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: #292959;
-    margin-bottom: 15px;
-}
-
-.verse {
-    font-style: italic;
-    font-size: 20px;
-    color: #292959;
     margin-bottom: 20px;
-    max-width: 85%;
-    line-height: 1.5;
 }
 
-.names {
+.verse, .verse2, .text-ver {
+    font-style: italic;
+    color: #292959;
+    max-width: 85%;
+    line-height: 1;
+}
+.verse, .verse2 {
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+.verse2 {
+    margin-top: 10px;
+}
+.text-ver {
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+
+.names, .pname {
     font-family: "Alex Brush", cursive;
-    font-weight: 1000;
+    font-weight: 900;
     font-style: normal;
-    font-size: 50px;
     color: #292959;
 }
+.names {
+    font-size: 39px;
+    margin-bottom: 25px;
+}
+.pname {
+    font-size: 28px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
-.btn {
-    display: inline-flex;
-    justify-content: center; 
-    align-items: center;     
-    text-align: center;      
-    
+h2 {
+    margin-top: 0;
+    color: #292959;
+    font-size: 20px;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+/* ==========================================================================
+   5. BUTTONS, TOGGLES & CARDS
+   ========================================================================== */
+.btn, button.submit-btn {
+    width: 140px;  
+    height: 30px;
+    border-radius: 15px;
     background-color: #292959;
     color: white;
     border: none;
-    height: 30px;
-    width: 140px;  
-    border-radius: 15px;
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s ease;
     text-decoration: none;
+    display: inline-flex;
+    justify-content: center; 
+    align-items: center;    
+    text-align: center;      
+}
+.btn:hover, button.submit-btn:hover {
+    background-color: #1a337e;
 }
 
-.btn:hover {
-    background-color: #1a337e;
+button.submit-btn {
+    width: 100%;
+    padding: 14px;
+    height: auto;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+button.submit-btn:hover {
+    background-color: #303069;
+    color:white;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background: #e2e8f0;
+    color: #292959;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    text-transform: uppercase;
 }
 
 .toggle-container {
     display: flex;
-    width: 100%;
-    background: #e2e8f0;
+    background-color: #e2e8f0;
+    padding: 3px;
     border-radius: 30px;
-    padding: 4px;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
+    width: 85%;
 }
 
 .toggle-btn {
     flex: 1;
-    padding: 10px;
     border: none;
+    padding: 10px 15px;
+    background: transparent;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333333;
     border-radius: 25px;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.3s;
-    background: transparent;
-    color: #292959;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .toggle-btn.active {
-    background: #292959;
-    color: #ffffff;
+    background-color: #292959;
+    color: white;
+    box-shadow: var(--shadow-sm);
 }
 
+/* Event Clock Grid Layout layout rules */
 .countdown-grid {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0 35px 0;
-        }
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
 
-        .countdown-box {
-            background: rgba(204, 216, 231, 0.5);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            padding: 10px;
-            border-radius: 8px;
-            min-width: 65px;
-            border-bottom: 3px solid #292959;
-        }
 
-        .countdown-num {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #292959;
-        }
+.countdown-box {
+    flex: 1;
+    background-color: #e2e8f0;
+    padding: 12px 5px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    border-bottom: 3px solid #292959;
+}
 
-        .countdown-label {
-            font-size: 0.7rem;
-            color: #666666;
-            text-transform: uppercase;
-        }
+.countdown-num {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #292959;
+}
 
-        /* Details Card Layout */
-        .info-card {
-            background-color: rgba(210, 221, 236, 0.75);
-            border-radius: 16px;
-            padding: 24px;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-            text-align: center;
-           
-        }
+.countdown-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: #333333;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+}
 
-        .info-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #202020;
-            margin-bottom: 4px;
-        }
+.info-card {
+    background-color: rgba(210, 221, 236, 0.75);
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    text-align: center;
+}
+.info-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #202020;
+    margin-bottom: 4px;
+}
+.info-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #292959;
+    margin-bottom: 16px;
+}
+.info-value:last-child {
+    margin-bottom: 0;
+}
 
-        .info-value {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #292959;
-            margin-bottom: 16px;
-        }
+/* Map Location Settings */
+.map-button-group {
+    display: flex;
+    gap: 12px;
+    width: 90%;
+    margin-top: 1rem;
+}
 
-        .info-value:last-child {
-            margin-bottom: 0;
-        }
-
-/* 1. Add this style to wrap the two buttons together */
+/* 1. Parent Container (Centers the buttons on the screen) */
 .map-button-group {
     display: flex;
     justify-content: center; /* Centers the buttons horizontally */
-    gap: 12px;               /* Controls the spacing between the buttons */
+    gap: 16px;              /* Adds space between the two buttons */
     width: 100%;
-    margin: 15px 0;          /* Adds space above and below the row */
+    margin-top: 15px;
 }
 
-/* 2. Your updated button style (fixed for side-by-side layouts) */
+/* 2. Button Styling (Strict 60px x 60px & Internally Centered) */
 .map-btn {
     display: inline-flex;
+    flex-direction: row;  /* Stack icon and text vertically if needed */
+    align-items: center;     /* Centers content vertically */
+    justify-content: center; /* Centers content horizontally */
+    text-align: center;
+    border-radius: 50%;      /* Changes square to a perfect, elegant circle (or use 12px for squircle) */
+    font-size: 0.65rem;      /* Slightly smaller to fit beautifully inside 60px */
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+
+}
+
+.btn-google {
+
+    border: 4px solid white;
+}
+
+.btn-waze {
+    
+    border: 4px solid white;
+}
+
+.map-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+/* ==========================================================================
+   6. NAVIGATION, MODALS & INTERACTIVES
+   ========================================================================== */
+
+
+/* Update this in styles.css */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%); /* Slide it down out of view initially */
+    width: 100%;
+    max-width: 480px;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 12px 0 max(12px, env(safe-area-inset-bottom));
+    border-top: 1px solid #8787d1;
+    z-index: 999;
+    opacity: 0; /* Hide it initially */
+    visibility: hidden; /* Prevent clicking hidden buttons */
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth slide & fade transition */
+}
+
+/* Add this rule right below .bottom-nav */
+body.revealed .bottom-nav {
+    transform: translateX(-50%) translateY(0); /* Slide it up into place */
+    opacity: 1; /* Fade it in */
+    visibility: visible; /* Make it clickable */
+}
+
+.nav-item, .nav-item2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333333;
+    font-size: 0.65rem;
+    font-weight: 600;
+    flex: 1;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-item:hover, .nav-item2:hover {
+    color: #292959;
+}
+
+.nav-icon, .nav-icon2 {
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+
+.music-toggle {
+    width: 80px;
+    height: 80px;
+    background-image: url('img/g35.png');
+    background-size: 110%;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    border-radius: 50%;
+    display: sticky;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    
-    /* Removed the hardcoded width and absolute margins so they don't break the row */
-    flex: 1;                 /* Forces both buttons to have an equal, flexible width */
-    max-width: 60px;        /* Prevents buttons from getting too wide on tablet screens */
-    height: 60px;
-    padding: 0 10px;
-    border-radius: 8px;
-    text-decoration: none;
-    
-    /* Clean, highly readable text settings for small buttons */
-    font-weight: 600;        
-    font-size: 11px;         
-    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: -40px;
+    margin-bottom: 5px;
+    box-shadow: 0 4px 8px rgba(11, 27, 79, 1);
+    border: 4px solid #e2e8f0;
 }
 
-.map-btn:active {
-    transform: scale(0.96);
-}
-
-.btn-google { background: #292959; color: white; }
-.btn-waze { background: #292959; color: white; }
-
-     
-
-        /* Contact Section Grid */
-        .contact-divider {
-            width: 8%;
-            height: 1px;
-            background: rgba(255,255,255,0.15);
-            margin: 0px 0;
-        }
-
-        .contact-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 12px;
-            background: rgba(255,255,255,0.05);
-            padding: 8px 12px;
-            border-radius: 6px;
-        }
-
-        .contact-name {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .contact-actions a {
-            color: #202059;
-            text-decoration: none;
-            font-size: 0.8rem;
-            margin-left: 10px;
-            border: 1px solid rgba(138, 119, 56, 0.4);
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 20px;
-            font-size: 1.2rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        .bottom-nav {
-            border-radius: 30px 30px 0 0;
-            position: fixed;
-            bottom: 0;
-            width: 450px;
-            height: 55px;
-            background-color: #e2e8f0;
-            opacity: 0.85;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-           
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #64748b;
-            font-size: 11px;
-            cursor: pointer;
-        }
-
-        .nav-item.active, .nav-item:hover {
-            color: #0B1B4F;
-        }
-
-        .nav-icon {
-            font-size: 20px;
-            margin-bottom: 2px;
-        }
-
- .music-toggle {
-            
-            width: 60px;
-            height: 60px;
-            background-image: url('img/initial\ logo.png'); /* Replace with your image link or SVG path */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 130%;
-            color: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 20px;
-            margin-top: -20px;
-            box-shadow: 0 4px 8px rgba(11, 27, 79, 1);
-            border: 4px solid #e2e8f0;
-        }
 
 
-/* Modal Overlay Background */
 .modal-overlay {
     display: none;
     position: fixed;
-    width: 450px; height: 100%;
-    background: 		rgba(226, 232, 240, 0.25);
+    
+    /* Strict Width Controls for Modals */
+    width: 100%;
+    max-width: 480px; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    height: 110%;
+    background: rgba(226, 232, 240, 0.25);
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(2px); /* Optional: adds a subtle blur effect to the background */
+    backdrop-filter: blur(2px); 
+    z-index: 10;
 }
 
-/* Modal Box */
 .modal-content {
-    background: #d4d9e0;
+    background: #e2e8f0;
     opacity: 0.95;
-    width: 90%;
-    max-width: 350px;
-    border-radius: 25px; /* Keeps your nice rounded corners */
+    width: 350px;
+    height: 295px;
+    border-radius: 25px; 
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(41, 41, 89, 0.15); /* Tinted shadow to match theme */
-    width: 350px;
+    box-shadow: 0 10px 30px rgba(41, 41, 89, 0.15); 
+    z-index: 100;
 }
 
 .close-btn {
     position: absolute;
-    top: -4.5px; right: 9px;
-    background: none; border: none;
-    font-size: 24px; cursor: pointer; 
+    top: -4.5px; 
+    right: 9px;
+    background: transparent; 
+    border: none;
+    font-size: 24px; 
+    cursor: pointer; 
     z-index: 10;
-    color: #292959; /* Matching Deep Navy */
+    color: #292959; 
 }
 
-/* Tabs Styling - Transformed to mimic the "Bersanding/Bertandang" Pill Style */
-.modal-tabs {
+.modal-tabs, .tabs {
     display: flex;
-    background: #f2f6fc; /* Soft Ice Blue container background from image */
-    margin: 20px 15px 0px 15px; /* Floating pill container style */
+    background: #f2f6fc; 
+    margin: 20px 15px 0px 15px; 
     border-radius: 30px;
-    padding: 4px;
+    padding: 2px;
+    max-height: 60px;
+    max-width: 350px;
+    font-size: 15px ;
+    z-index: 10;
+}
+.tabs {
+    background: #edf2f7;
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 28px;
+    border: 4px solid #edf2f7;
+    margin: 0;
+    max-width: none;
+    max-height: none;
 }
 
 .tab-btn {
     flex: 1; 
     padding: 10px 15px;
     border: none; 
-    background: transparent; /* Seamless blend */
-    color: #292959; /* Deep Navy text */
+    background: transparent; 
+    color: #292959; 
     font-weight: bold; 
     font-size: 14px;
     cursor: pointer;
-    border-radius: 25px; /* Makes the individual button active state a pill */
+    border-radius: 25px; 
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+.tabs .tab-btn {
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #718096;
+}
 .tab-btn.active {
-    background: #292959; /* Deep Navy active color */
-    color: #f2f6fc; /* White text when selected like "Bersanding" */
+    background: #292959; 
+    color: #f2f6fc; 
+}
+.tabs .tab-btn.active {
+    color: #ffffff;
+    background: #292959;
+    border: 3px transparent;
 }
 
-/* Horizontal Slider Mechanism */
-.slider-viewport {
+.slider-viewport, .swipe-viewport {
+    position: relative;
     width: 100%;
     overflow: hidden;
 }
-.slider-track {
+
+.slider-track, .swipe-track {
     display: flex;
     width: 200%; 
+    will-change: transform;
+}
+.slider-track {
     transition: transform 0.3s ease-out;
 }
-.slide-page {
+.swipe-track {
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slide-page, .form-page, .swipe-track .screen {
     width: 50%; 
     padding: 15px;
     box-sizing: border-box;
+    flex-shrink: 0;
+}
+.form-page {
+    padding: 30px 25px;
 }
 
-/* Contact Rows - Styled beautifully with soft background framing */
+/* Contact Rows Configuration */
+.contact-divider {
+    width: 8%;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin: 0px 0;
+}
+
 .contact-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #292959;
-    background: #f2f6fc; /* Clean, subtle Ice Blue tint for list rows */
+    background: #f2f6fc; 
     padding: 12px 15px;
-    margin-bottom: 8px; /* Adds space between individual contact blocks */
-    border-radius: 25px; /* Clean rounded row boxes */
+    margin-bottom: 8px; 
+    border-radius: 25px; 
     box-shadow: 0 2px 6px rgba(41, 41, 89, 0.04);
 }
-.contact-row:last-child { margin-bottom: 0; }
+.contact-row:last-child { 
+    margin-bottom: 0; 
+}
 
 .contact-name { 
     font-weight: 600;
@@ -427,20 +624,17 @@ body {
 
 .contact-actions {
     display: flex;
-    gap: 6px; /* Uniform spacing between buttons */
+    gap: 6px; 
 }
-
 .contact-actions a {
     text-decoration: none;
     padding: 6px 12px;
-    border-radius: 20px; /* Matching pill buttons */
+    border-radius: 20px; 
     font-size: 13px;
     font-weight: 500;
     display: inline-block;
     transition: background 0.2s;
 }
-
-/* Call Button - Soft Slate Blue tone */
 .contact-actions a[href^="tel"] { 
     background: #e2e8f0; 
     color: #292959; 
@@ -448,8 +642,6 @@ body {
 .contact-actions a[href^="tel"]:hover { 
     background: #cbd5e1; 
 }
-
-/* WhatsApp Button - Stays true to WhatsApp brand branding but with rounded structure */
 .contact-actions a[href^="https://wa.me"] { 
     background: #25D366; 
     color: #ffffff; 
@@ -458,8 +650,117 @@ body {
     background: #20ba5a; 
 }
 
-@media (max-width: 700px) {
- html{
-    font-size: 80%;
-  }
+.scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    font-size: 1.2rem;
+    animation: bounce 2s infinite;
+}
+
+
+
+/* Combined Indicators setup */
+.swipe-indicators, .swipe-indicators2, .swipe-indicators3, .swipe-indicators4 {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.swipe-indicators {
+    position: absolute;
+    bottom: 16vh; /* Adjust this value to push it higher or lower */
+    left: 50%;
+    transform: translatey(-50%);
+    transform: translateX(-50%);
+    z-index: 10; /* Ensures it floats on top of the swipe track content */
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    width: auto; /* Allow it to shrink wrap the dots */
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #edf2f7;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);;
+}
+
+.dot.active {
+    background-color: #292959;
+    width: 20px;
+    border-radius: 4px;
+}
+
+
+/* ==========================================================================
+   7. FORM CONTROLS
+   ========================================================================== */
+.form-group {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-control, input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+.form-control {
+    padding: 14px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 0.95rem;
+}
+.form-control:focus, input:focus {
+    outline: none;
+    border-color: #292959 ;
+}
+.form-control:focus {
+    border-color: var(--gold-accent);
+}
+.form-control option {
+    color: var(--text-dark);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #292959 ;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+}
+.radio-group label {
+    font-size: 0.95rem;
+    color: white ;
+    cursor: pointer;
+}
+
+.hint {
+    text-align: center;
+    font-size: 12px;
+    color: #1d4579;
+    margin-top: 15px;
+}
+
+body, .mobile-container {
+    /* Allows normal vertical scrolling, but blocks pinch-to-zoom and double-tap zooming */
+    touch-action: pan-y; 
+    
+    /* Disables text size adjustments when switching device orientations */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
