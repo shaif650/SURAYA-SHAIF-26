@@ -1,5 +1,5 @@
 /* ==========================================================================
-   THEME PALETTE VARIABLES & SYSTEM GLOBAL RESETS
+   1. THEME PALETTE VARIABLES & SYSTEM GLOBAL RESETS
    ========================================================================== */
 :root {
     --primary-navy: #0f1b35;
@@ -21,14 +21,12 @@
 }
 
 body {
-    background-color: #e2e8f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    background-color: var(--off-white); /* Mobile-first default */
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     color: var(--text-dark);
-    overflow: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
     touch-action: pan-y;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -37,21 +35,20 @@ body {
 body.locked {
     overflow: hidden;
 }
+
 body.locked .mobile-container {
-    overflow-y: hidden ;
+    overflow-y: hidden;
 }
+
 /* ==========================================================================
-   MOBILE CONTAINER ARCHITECTURE FRAMEWAY
+   2. MOBILE CONTAINER ARCHITECTURE FRAMEWAY
    ========================================================================== */
 .mobile-container {
     width: 100%;
-    max-width: 480px;
     height: 100vh;
     height: 100dvh;
-    max-height: 920px;
     background-color: var(--pure-white);
     position: relative;
-    box-shadow: 0 20px 50px rgba(15, 27, 53, 0.2);
     overflow-y: auto;
     overflow-x: hidden;
     scroll-behavior: smooth;
@@ -71,17 +68,14 @@ body.locked .mobile-container {
 /* Base structural layout for section screens */
 .screen {
     width: 100%;
-    
-    /* Safely calculates remaining room by subtracting the exact 80px menu dock bar */
     min-height: calc(100vh - 80px); 
     min-height: calc(100dvh - 80px); 
-    
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px 24px; /* Slightly padded in to prevent elements from bleeding into edges */
+    padding: 30px 20px; /* Adjusted to prevent text crowding on small devices */
     text-align: center;
     position: relative;
     box-sizing: border-box;
@@ -92,8 +86,6 @@ body.locked .mobile-container {
     background-size: cover;
     background-position: center top;
     color: var(--text-light);
-    
-    /* Strict viewport confinement */
     min-height: 100vh; 
     min-height: 100dvh;
     width: 100%;
@@ -112,58 +104,66 @@ body.locked .mobile-container {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding-left: 0 !important;   /* Memadam padding asal skrin untuk elak herot */
-    padding-right: 0 !important;  /* Memadam padding asal skrin untuk elak herot */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
+/* ==========================================================================
+   3. HORIZONTAL SWIPE MULTI-TRACK MODULE
+   ========================================================================== */
 .swipe-track {
     display: flex;
-    width: 200%; /* Trek berkembar untuk 2 kad leretan */
+    width: 200%; /* Twin tracks for 2 swipe cards */
     flex-grow: 1;
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Memaksa elemen kad duduk tepat di tengah-tengah peranti */
+/* Force elements directly into layout core centers */
 .swipe-track .screen.bg-all {
-    width: 50%; /* Membahagi 200% / 2 = Tepat 100% lebar paparan */
+    width: 50%; /* 200% divided by 2 = exactly 100% viewport view width */
     min-height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 30px 24px;      /* Ruang selesa untuk teks daripada terkena bingkai telefon */
-    padding-top: 100px;
-    box-sizing: border-box;  /* Mengunci ruang padding di dalam saiz 50% */
+    padding: 100px 24px 30px 24px;
+    box-sizing: border-box;
     flex-shrink: 0;
 }
 
-.swipe-indicators {
+.swipe-indicators, .swipe-indicators3, .swipe-indicators4 {
     display: flex;
     gap: 8px;
     margin-top: 10px;
-    margin-bottom: 35px; /* Memberi ruang visual dari menu bar bawah */
+    margin-bottom: 35px; /* Visual cushion from fixed bottom navigation */
     justify-content: center;
     width: 100%;
     z-index: 10;
 }
 
+.swipe-indicators {
+    margin-top: 25px;
+}
+
 .dot {
-    width: 7px;
-    height: 7px;
-    background-color: #cbd5e1;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
+    background-color: #b1b3b6;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .dot.active {
-    background-color: var(--primary-navy);
-    transform: scale(1.3);
+    background-color: #292959;
+    width: 15px;
+    border-radius: 4px;
+    transform: scale(1.1);
 }
 
 /* ==========================================================================
-   TYPOGRAPHY & DESIGN DESIGNATIONS
+   4. TYPOGRAPHY & TEXT STRUCTURING DESIGNATIONS
    ========================================================================== */
 .monogram img {
     width: 150px;
@@ -242,7 +242,7 @@ body.locked .mobile-container {
 }
 
 /* ==========================================================================
-   INTERACTIVE BUTTON COMPONENT MOTIFS
+   5. INTERACTIVE BUTTON & COMPONENT MOTIFS
    ========================================================================== */
 .btn {
     background-color: var(--pure-white);
@@ -257,6 +257,7 @@ body.locked .mobile-container {
     letter-spacing: 1.5px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     transition: transform 0.2s ease, background-color 0.2s ease;
+    min-height: 48px; /* Safe mobile tap target minimum */
 }
 
 .btn:active {
@@ -264,47 +265,7 @@ body.locked .mobile-container {
     background-color: var(--off-white);
 }
 
-/* ==========================================================================
-   MODULE 1: HORIZONTAL SWIPE MULTI-TRACKS (SCREEN 2)
-   ========================================================================== */
-.swipe-track {
-    display: flex;
-    width: 200%;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.swipe-track .screen {
-    width: 50%;
-    padding: 40px 24px;
-}
-
-.swipe-indicators {
-    display: flex;
-    gap: 8px;
-    margin-top: 25px;
-    justify-content: center;
-    width: 100%;
-}
-
-.dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #b1b3b6;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);;
-}
-
-.dot.active {
-    background-color: #292959;
-    width: 15px;
-    border-radius: 4px;
-}
-
-
-/* ==========================================================================
-   MODULE 2: EVENT DETAIL PANEL TOGGLES & COUNTDOWN (SCREEN 3)
-   ========================================================================== */
+/* Toggle Switcher Buttons */
 .toggle-container {
     display: inline-flex;
     background-color: rgba(15, 27, 53, 0.06);
@@ -323,6 +284,7 @@ body.locked .mobile-container {
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.3s ease;
+    min-height: 44px;
 }
 
 .toggle-btn.active {
@@ -331,7 +293,44 @@ body.locked .mobile-container {
     box-shadow: 0 4px 12px rgba(15, 27, 53, 0.15);
 }
 
-/* Countdown Grid Dashboard */
+/* Map Action Center Link Layout Buttons */
+.map-button-group {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    justify-content: center;
+}
+
+.map-btn {
+    display: inline-flex;
+    align-items: center;    
+    justify-content: center; 
+    text-align: center;
+    width: 55px;  /* Defined explicit proportions for finger tap metrics */
+    height: 55px; 
+    border-radius: 50%;      
+    font-size: 0.65rem;      
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-google {
+    border: 4px solid white;
+}
+
+.btn-waze {
+    border: 4px solid white;
+}
+
+.map-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* ==========================================================================
+   6. COUNTDOWN MODULE DASHBOARD GRID
+   ========================================================================== */
 .countdown-grid {
     display: flex;
     gap: 12px;
@@ -364,10 +363,9 @@ body.locked .mobile-container {
     margin-top: 2px;
 }
 
-/* Dynamic Content Display Area */
 .info-card {
     background: var(--pure-white);
-    width: 70%;
+    width: 85%; /* Scaled outward layout elements slightly broader for clean readability */
     padding: 24px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-soft);
@@ -399,46 +397,8 @@ body.locked .mobile-container {
     margin-bottom: 0;
 }
 
-/* Map Row Links Layout Buttons */
-.map-button-group {
-    display: flex;
-    width: 100%;
-    gap: 15px;
-    justify-content: center;
-}
-
-.map-btn {
-    display: inline-flex;
-    flex-direction: row;  /* Stack icon and text vertically if needed */
-    align-items: center;     /* Centers content vertically */
-    justify-content: center; /* Centers content horizontally */
-    text-align: center;
-    border-radius: 50%;      /* Changes square to a perfect, elegant circle (or use 12px for squircle) */
-    font-size: 0.65rem;      /* Slightly smaller to fit beautifully inside 60px */
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-
-
-}
-
-.btn-google {
-
-    border: 4px solid white;
-}
-
-.btn-waze {
-    
-    border: 4px solid white;
-}
-
-.map-btn:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-}
-
 /* ==========================================================================
-   MODULE 3: RSVP VIEWPORT MANAGEMENT FORM SLIDER (SCREEN 4)
+   7. RSVP FORM PROCESSING AND VIEWPORT MANAGEMENT 
    ========================================================================== */
 .tabs {
     display: flex;
@@ -460,6 +420,7 @@ body.locked .mobile-container {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
+    min-height: 44px;
 }
 
 .tabs .tab-btn.active {
@@ -538,6 +499,7 @@ body.locked .mobile-container {
     letter-spacing: 0.5px;
     box-shadow: 0 4px 12px rgba(15, 27, 53, 0.15);
     transition: background-color 0.2s, transform 0.2s;
+    min-height: 48px;
 }
 
 .submit-btn:active, .btn-submit:active {
@@ -545,17 +507,8 @@ body.locked .mobile-container {
     transform: scale(0.98);
 }
 
-.swipe-indicators3, .swipe-indicators4 {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 25px;
-    margin-bottom: 5px;
-    width: 100%;
-}
-
 /* ==========================================================================
-   MODULE 4: INCLUDED INDEPENDENT STREAM 3D CAROUSEL GUESTBOOK (SCREEN 5)
+   8. 3D CAROUSEL GUESTBOOK STREAM GRAPHICS
    ========================================================================== */
 #gallery-guestbook .scrollable-content {
     width: 100%;
@@ -612,8 +565,8 @@ body.locked .mobile-container {
 }
 
 .nav-arrow {
-    width: 36px;
-    height: 36px;
+    width: 40px; /* Upgraded metrics for finger tap accessibility scale */
+    height: 40px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.95);
     border: none;
@@ -647,7 +600,6 @@ textarea.form-control {
     height: 85px;
 }
 
-/* Wishes Feed Styling */
 .wishes-feed {
     display: flex;
     flex-direction: column;
@@ -661,7 +613,6 @@ textarea.form-control {
     padding: 16px;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 10px rgba(15, 27, 53, 0.02);
-    border-left: 3px solid var(--gold-accent);
     border: 1px solid rgba(15, 27, 53, 0.03);
     border-left: 3px solid var(--gold-accent);
 }
@@ -692,45 +643,47 @@ textarea.form-control {
 }
 
 /* ==========================================================================
-   MODULE 5: BOTTOM APP TAB NAVIGATION DOCK BAR
+   9. INTERACTION CONTROLS: FIXED BOTTOM NAVIGATION BAR
    ========================================================================== */
 .bottom-nav {
-    border-radius: 30px 30px 0 0;
     position: fixed;
     bottom: 0;
-    
-    /* Strict Width Controls: Ensures it locks inside the 450px boundary */
-    width: 100vw;          
-    max-width: 480px;       
-    left: 50vw;
-    transform: translateX(-50%) translateY(150%); /* Centered horizontally, hidden vertically */
+    left: 0;
+    width: 100%;
     height: 80px;
-    background-color: #e2e8f0e3;
+    background-color: rgba(226, 232, 240, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.6s ease-in-out;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%); /* Default entry configuration hidden state */
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     z-index: 10;
 }
 
-/* Updated selector to preserve horizontal centering when revealed */
 body.revealed #undangan {
     display: block; 
 }
+
 body.revealed .bottom-nav {
-    transform: translateX(-50%) translateY(0); 
+    transform: translateY(0); 
 }
+
 .nav-item, .nav-item2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
     color: var(--text-muted);
     font-size: 0.65rem;
     font-weight: 600;
     gap: 4px;
     flex: 1;
+    min-height: 48px; /* Safe human thumb contact parameter metrics */
     transition: color 0.2s;
 }
 
@@ -742,60 +695,46 @@ body.revealed .bottom-nav {
     font-size: 1.2rem;
 }
 
-/* Animated Music Button Dock Component */
+/* Floating Audio Player Node Controls */
 @keyframes rotateDisc {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-/* Base class: Set up the rotation but keep it paused by default */
 .music-toggle {
-    width: 50px;
-    height: 50px;
-    background: url('img/g35.png') no-repeat center;
-    background-size: contain;
-    
-    /* Pre-binding the rotation so it stays in its current position when paused */
-    animation: rotateDisc 4s linear infinite;
-    animation-play-state: paused; 
-        width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background-image: url('img/g35.png');
     background-size: 110%;
     background-position: center;
     background-repeat: no-repeat;
     color: #ffffff;
     border-radius: 50%;
-    display: sticky;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     font-size: 20px;
-    margin-top: -40px;
+    margin-top: -35px;
     margin-bottom: 5px;
-    box-shadow: 0px 0px 10px rgba(11, 27, 79, 1);
-    border: 4px solid #e2e8f0;
-
+    box-shadow: 0px 4px 15px rgba(11, 27, 79, 0.4);
+    border: 4px solid var(--off-white);
+    animation: rotateDisc 4s linear infinite;
+    animation-play-state: paused; 
 }
 
-/* Active class: Triggers when the music is playing */
 .music-toggle.playing {
-    /* Runs both your pulse and the rotation at the same time */
     animation: pulseDisc 1.5s infinite ease-in-out, rotateDisc 4s linear infinite;
     animation-play-state: running;
 }
 
 @keyframes pulseDisc {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
+    50% { transform: scale(1.08); }
 }
 
 /* ==========================================================================
-   MODULE 6: MODAL POPUP WINDOW DIRECTORIES
+   10. MODAL POPUP DIALOG WINDOW MODULE
    ========================================================================== */
 .modal-overlay {
     position: fixed;
@@ -857,6 +796,7 @@ body.revealed .bottom-nav {
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.2s;
+    min-height: 38px;
 }
 
 .modal-tabs .tab-btn.active {
@@ -883,7 +823,6 @@ body.revealed .bottom-nav {
     gap: 10px;
 }
 
-/* Contact List Rows Card Styles */
 .contact-row {
     background-color: var(--pure-white);
     padding: 14px 16px;
@@ -910,9 +849,12 @@ body.revealed .bottom-nav {
     text-decoration: none;
     font-size: 0.75rem;
     font-weight: 700;
-    padding: 6px 14px;
+    padding: 8px 14px;
     border-radius: 6px;
     transition: opacity 0.15s;
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
 }
 
 .contact-actions a:first-child {
@@ -930,7 +872,7 @@ body.revealed .bottom-nav {
 }
 
 /* ==========================================================================
-   FADE INTRO ANIMATION LAYER EFFECTS
+   11. ENGINE TRANSLATION TRANSFORM LAYER EFFECTS
    ========================================================================== */
 .fade-in-up {
     opacity: 0;
@@ -942,6 +884,48 @@ body.revealed .bottom-nav {
 @keyframes fadeInUp {
     to {
         opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   12. DESKTOP RESPONSIVE BREAKPOINT GRID LAYOUT
+   Triggers exclusively on screens wider than tablets (768px+)
+   ========================================================================== */
+@media (min-width: 768px) {
+    body {
+        background-color: #e2e8f0; /* Desktop canvas backing gray palette */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Prevent master frame desktop window scrollbars */
+    }
+
+    .mobile-container {
+        width: 100%;
+        max-width: 450px; /* Lock contents cleanly into simulated hardware proportions */
+        height: 100vh;
+        height: 100dvh;
+        max-height: 920px;
+        background-color: var(--pure-white);
+        border-radius: 24px; /* Creates clean aesthetic edge curvature framing */
+        box-shadow: 0 20px 50px rgba(15, 27, 53, 0.25);
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* Recalibrate bottom app navigation dock strictly inside the desktop absolute framework wrapper */
+    .bottom-nav {
+        position: absolute;
+        width: 100%;
+        max-width: 450px;
+        left: 0;
+        border-radius: 20px 20px 0 0;
+        transform: translateY(100%);
+    }
+
+    body.revealed .bottom-nav {
         transform: translateY(0);
     }
 }
