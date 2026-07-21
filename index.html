@@ -127,7 +127,8 @@ body {
 .mogram2 img {
     width: 200px;
     height: auto;
-    margin-bottom: 20px;
+    margin-top: 60px;
+    margin-bottom: 5px;
     filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.4));
 }
 
@@ -770,8 +771,8 @@ h1.pname {
                         <h3 class="pop-anim pop-delay-5">Lokasi</h3>
                         <p class="pop-anim pop-delay-5">LOT 525, Kg Pohon Buloh,<br>Pasir Mas, Kelantan.</p>
                         <div class="map-grid pop-anim pop-delay-5">
-                            <a href="https://maps.google.com/?q=LOT+525,+Kg+Pohon+Buloh,+Pasir+Mas,+Kelantan" target="_blank" class="btn-map"><i class="fab fa-google"></i> Google</a>
-                            <a href="https://waze.com/ul?q=LOT+525,+Kg+Pohon+Buloh,+Pasir+Mas,+Kelantan" target="_blank" class="btn-map"><i class="fab fa-waze"></i> Waze</a>
+                            <a href="https://maps.app.goo.gl/DYvHUNfLDcpvj2Eb7" target="_blank" class="btn-map"><i class="fab fa-google"></i> Google</a>
+                            <a href="https://waze.com/ul/hw30defr1n" target="_blank" class="btn-map"><i class="fab fa-waze"></i> Waze</a>
                         </div>
                     </div>
                     <!-- Info Bertandang -->
@@ -789,8 +790,8 @@ h1.pname {
                         <h3 class="pop-anim pop-delay-5">Lokasi</h3>
                         <p class="pop-anim pop-delay-5">Bagan Serai Wedding Hall,<br>Bagan Serai, Perak.</p>
                         <div class="map-grid pop-anim pop-delay-5">
-                            <a href="https://maps.google.com/?q=Bagan+Serai+Wedding+Hall,+Bagan+Serai,+Perak" target="_blank" class="btn-map"><i class="fab fa-google"></i> Google</a>
-                            <a href="https://waze.com/ul?q=Bagan+Serai+Wedding+Hall,+Bagan+Serai,+Perak" target="_blank" class="btn-map"><i class="fab fa-waze"></i> Waze</a>
+                            <a href="https://maps.app.goo.gl/8jHG6FWtfuodLvtS7" target="_blank" class="btn-map"><i class="fab fa-google"></i> Google</a>
+                            <a href="https://waze.com/ul/hw0zkx8byf" target="_blank" class="btn-map"><i class="fab fa-waze"></i> Waze</a>
                         </div>
                     </div>
                 </div>
@@ -1027,11 +1028,14 @@ h1.pname {
                 let newLeft = initialLeft + deltaX;
                 let newTop = initialTop + deltaY;
 
-                const maxLeft = window.innerWidth - ballContainer.offsetWidth;
-                const maxTop = window.innerHeight - ballContainer.offsetHeight;
+const navBarHeight = 65; // Height of bottom-nav-container
 
-                newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
-                newTop = Math.max(10, Math.min(newTop, maxTop - 10));
+const maxLeft = window.innerWidth - ballContainer.offsetWidth;
+// Subtract bottom navbar height so the button stops right above the nav bar
+const maxTop = window.innerHeight - ballContainer.offsetHeight - navBarHeight;
+
+newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
+newTop = Math.max(10, Math.min(newTop, maxTop - 10))
 
                 ballContainer.style.left = `${newLeft}px`;
                 ballContainer.style.top = `${newTop}px`;
