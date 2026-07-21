@@ -1,649 +1,1340 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation | Shaifullah & Suraya</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-</head>
+    <title>Undangan Raja Sehari - Shaifullah & Suraya</title>
+    <!-- FontAwesome & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600&family=Amiri&display=swap" rel="stylesheet">
 
-<body class="locked"> 
-
-        <audio id="weddingMusic" loop>
-        <source src="mp3/song 1.mp3" type="audio/mpeg">
-        </audio>
-
-<div class="mobile-container">
-        
-        <!-- SCREEN 1: HERO WELCOME -->
-        <section class="screen bg-full" id="home">
-            <h2 class="title fade-in-up" style="--delay: 1;">Undangan Raja Sehari</h2>
-            <div class="monogram fade-in-up" style="--delay: 2;">
-                <img src="img/initial logo.png" alt="Initial Logo">
-            </div>
-            <p class="verse fade-in-up" style="--delay: 3;">"وَخَلَقۡنَٰكُمۡ أَزۡوَٰجٗا"</p>            
-            <p class="verse fade-in-up" style="--delay: 4;">"And We created you in pairs"<br>— Surah An-Naba 78:8 —</p>
-            <h1 class="names fade-in-up" style="--delay: 5;">Shaifullah Ahmad<br>&<br>Suraya Zulkifli</h1>
-            <button onclick="openInvitation()" class="btn fade-in-up" style="--delay: 6;">Buka Undangan</button>
-
-        </section>
-
-        <!-- SCREEN 2: Undagan -->
-        <section class="screen bg-all" id="undangan">
-            <div id="swipeTrack" class="swipe-track">
-                
-                <!-- Screen 1: Undangan Bersanding -->
-                <div class="screen bg-all" id="undaganS">
-                    <h2 class="title">Undangan Bersanding</h2>
-                    <p class="verse2">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-                    <p class="pname">Normizah Binti Mohamed Nor<br>&<br>Keluarga</p>
-                    <p class="invite-text">Dengan penuh kesyukuran menjemput<br>Dato / Datin / Tuan / Puan / Encik / Cik</p> 
-                    <p class="phrase-text">Ke majlis perkahwinan puteri kami</p>
-                    <h1 class="pname">Nur Halida Suraya<br>Binti Zulkifli</h1>
-                    <p class="phrase-text">dengan pilihan hatinya</p>
-                    <h1 class="pname">Mohamad Shaifullah<br>Bin Ahmad Sharafae</h1>
-                </div>
-
-                <!-- Screen 2: Undangan Bertandang -->
-                <div class="screen bg-all" id="undagant">
-                    <h2 class="title">Undangan Bertandang</h2>
-                    <p class="verse2">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-                    <p class="pname">Ahmad Sharafae Bin Jafri<br>&<br>Raja Jamelah Binti Raja Daud</p>
-                    <p class="invite-text">Dengan penuh kesyukuran menjemput<br>Dato / Datin / Tuan / Puan / Encik / Cik</p> 
-                    <p class="phrase-text">Ke majlis perkahwinan putera kami</p>
-                    <h1 class="pname">Mohamad Shaifullah<br>Bin Ahmad Sharafae</h1>
-                    <p class="phrase-text">dengan pilihan hatinya</p>
-                    <h1 class="pname">Nur Halida Suraya<br>Binti Zulkifli</h1>
-                </div>
-
-            </div>
-
-            <div class="swipe-indicators" id="mainIndicators">
-                <span class="dot active" onclick="goToScreen(0)"></span>
-                <span class="dot" onclick="goToScreen(1)"></span>
-            </div>
-
-        </section>
-
-        <!-- SCREEN 3: Info Detail -->
-        <section class="screen bg-all" id="details">
-            <div class="swipe-indicators" id="detailIndicators">
-                <span class="dot active" onclick="switchEvent('perempuan')"></span>
-                <span class="dot" onclick="switchEvent('lelaki')"></span>
-            </div>
-            
-            <h2 class="title">Butiran Majlis</h2>
-
-            <div class="toggle-container">
-                <button class="toggle-btn active" onclick="switchEvent('perempuan')">Bersanding</button>
-                <button class="toggle-btn" onclick="switchEvent('lelaki')">Bertandang</button>
-            </div>
-            
-            <div class="countdown-grid">
-                <div class="countdown-box"><div class="countdown-num" id="days">00</div><div class="countdown-label">Days</div></div>
-                <div class="countdown-box"><div class="countdown-num" id="hours">00</div><div class="countdown-label">Hrs</div></div>
-                <div class="countdown-box"><div class="countdown-num" id="mins">00</div><div class="countdown-label">Min</div></div>
-                <div class="countdown-box"><div class="countdown-num" id="secs">00</div><div class="countdown-label">Sec</div></div>
-            </div>
-
-            <!-- Dynamic Info Cards -->
-            <div class="info-card" id="event-info"></div>
-        
-            <div class="map-button-group">
-                <a href="#" id="go-maps" target="_blank" class="map-btn btn-google"><img src="img/GMPS.png" alt="Google Maps"></a>
-                <a href="#" id="go-waze" target="_blank" class="map-btn btn-waze"><img src="img/WAZE.png" alt="Waze"></a>
-            </div>
-        </section>   
-        
-        <!-- SCREEN 4: RSVP Input -->
-        <section class="screen bg-all" id="rsvp">
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchPage(0)">Bersanding</button>
-                <button class="tab-btn" onclick="switchPage(1)">Bertandang</button>
-            </div>
-
-            <!-- Swipeable Area -->
-            <div class="slider-viewport" id="sliderViewport">
-                <div class="slider-track" id="sliderTrack">
-                  
-                    <!-- PAGE 1: BERSANDING -->
-                    <div class="form-page">
-                        <h2>RSVP Majlis Bersanding</h2>
-                        <form id="bersandingForm">
-                            <input type="hidden" name="formId" value="bersandingForm">  
-                            <div class="form-group">
-                                <input type="text" id="nameBersanding" name="name" required placeholder="Nama">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="paxBersanding" name="pax" min="1" required placeholder="Jumlah kehadiran">
-                            </div>
-                            <button type="submit" class="submit-btn">Sahkan Kehadiran</button>
-                        </form>
-                    </div>
-
-                    <!-- PAGE 2: BERTANDANG -->
-                    <div class="form-page">
-                        <h2>RSVP Majlis Bertandang</h2>
-                        <form id="bertandangForm">
-                            <input type="hidden" name="formId" value="bertandangForm">
-                            <div class="form-group">
-                                <input type="text" id="nameBertandang" name="name" required placeholder="Nama">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="paxBertandang" name="pax" min="1" required placeholder="Jumlah kehadiran">
-                            </div>
-                            <button type="submit" class="submit-btn">Sahkan Kehadiran</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Synchronized Bottom Indicators (RSVP) -->
-                <div class="swipe-indicators3" id="rsvpIndicators">
-                    <span class="dot active" onclick="switchPage(0)"></span>
-                    <span class="dot" onclick="switchPage(1)"></span>
-                </div>
-            </div> 
-        </section>
-
-        <!-- ==========================================================================
-     INCLUDED SCREEN SECTION: FUTURISTIC GALLERY & LIVE GUESTBOOK FEED
-     ========================================================================== -->
-<section class="screen bg-all" id="gallery-guestbook" style="position: relative; display: flex; flex-direction: column; height: 100%; width: 100%; overflow: hidden;">
+<style>
     
-    <!-- Outer wrapper handling the independent scroll stream so it doesn't break the parent frame -->
-    <div class="scrollable-content" style="flex: 1; overflow-y: auto; padding: 30px 20px; width: 100%; scroll-behavior: smooth;">
-        
-        <!-- MODULE 1: FUTURE CAROUSEL GALLERY -->
-        <h2 class="section-title">Memories Carousel</h2>
-        
-        <div class="carousel-viewport">
-            <!-- Navigation Control Interfaces -->
-            <div class="carousel-nav">
-                <button type="button" class="nav-arrow" onclick="rotateCarousel(-1)">&#10094;</button>
-                <button type="button" class="nav-arrow" onclick="rotateCarousel(1)">&#10095;</button>
-            </div>
-            
-            <!-- 3D Transform Track Wrapper -->
-            <div class="carousel-container" id="carousel">
-                <!-- Replace image sources with your local assets (e.g., img/gallery1.jpg) -->
-                <div class="carousel-card"><img src="https://picsum.photos/400/500?random=1" alt="Gallery Slide 1"></div>
-                <div class="carousel-card"><img src="https://picsum.photos/400/500?random=2" alt="Gallery Slide 2"></div>
-                <div class="carousel-card"><img src="https://picsum.photos/400/500?random=3" alt="Gallery Slide 3"></div>
-                <div class="carousel-card"><img src="https://picsum.photos/400/500?random=4" alt="Gallery Slide 4"></div>
-                <div class="carousel-card"><img src="https://picsum.photos/400/500?random=5" alt="Gallery Slide 5"></div>
-            </div>
-        </div>
+    /* ==========================================
+   1. TETAPAN UTAMA & PEMBULATAN VARIABEL (NAVY BLUE THEME)
+   ========================================== */
+:root {
+    --bg-gradient: linear-gradient(135deg, #0a1128 0%, #1c2d5a 50%, #0c1838 100%);
+    --card-bg: rgba(255, 255, 255, 0.07);
+    --card-border: rgba(255, 255, 255, 0.15);
+    --gold-primary: #e5c158;
+    --gold-hover: #f3d88c;
+    --text-main: #ffffff;
+    --text-muted: #cbd5e1;
+    --font-heading: 'Alex Brush', cursive;
+    --font-body: 'Montserrat', sans-serif;
+    --font-arabic: 'Amiri', serif;
+}
 
-        <!-- MODULE 2: USER FRIENDLY INPUT FORM -->
-        <h2 class="section-title">Ucapan & Doa</h2>
-        
-        <div class="wishes-card">
-            <form id="wishForm" onsubmit="handleWishSubmit(event)">
-                <div class="form-group">
-                    <label for="guestName">Nama Anda</label>
-                    <input type="text" id="guestName" class="form-control" placeholder="Masukkan nama penuh" required maxlength="40">
-                </div>
-                <div class="form-group">
-                    <label for="guestMessage">Ucapan Untuk Pengantin</label>
-                    <textarea id="guestMessage" class="form-control" placeholder="Tuliskan ucapan ikhlas atau doa anda di sini..." required maxlength="250"></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Kirim Ucapan</button>
-            </form>
-        </div>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
-        <!-- MODULE 3: DYNAMIC GOOGLE SHEETS FEED DISPLAY -->
-        <div class="wishes-feed" id="wishesFeed">
-            <!-- Output dynamically injected by fetchWishes() JavaScript routine -->
-        </div>
+body {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
 
+/* ==========================================
+   POP-UP ANIMATION FOR TITLES, HEADINGS & PARAGRAPHS
+   ========================================== */
+@keyframes popUpEffect {
+    0% {
+        opacity: 0;
+        transform: translateY(25px) scale(0.92);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.pop-anim {
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.page.active .pop-anim {
+    animation: popUpEffect 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.page.active .pop-delay-1 { animation-delay: 0.1s; }
+.page.active .pop-delay-2 { animation-delay: 0.25s; }
+.page.active .pop-delay-3 { animation-delay: 0.4s; }
+.page.active .pop-delay-4 { animation-delay: 0.55s; }
+.page.active .pop-delay-5 { animation-delay: 0.7s; }
+
+/* Container untuk memastikan reka bentuk kelihatan seperti aplikasi mudah alih */
+.page {
+    display: none;
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    padding: 30px 20px 100px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+}
+
+/* ==========================================
+   2. HERO PAGE (#hero-page)
+   ========================================== */
+#hero-page {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 30px;
+}
+
+#hero-page.active {
+    display: flex;
+}
+
+.main-title {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    margin-bottom: 20px;
+}
+
+.mogram img {
+    width: 140px;
+    height: auto;
+    margin-bottom: 20px;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.mogram2 img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.couple-names-hero {
+    font-family: var(--font-heading);
+    font-size: 42px;
+    line-height: 1.2;
+    color: #ffffff;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.arabic-verse {
+    font-family: var(--font-arabic);
+    font-size: 28px;
+    color: var(--gold-primary);
+    margin-bottom: 8px;
+}
+
+.translation-text {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 35px;
+}
+
+/* ==========================================
+   3. BUTANG ELEGAN & KAD AESTHETIC
+   ========================================== */
+.btn-elegant {
+    background: var(--gold-primary);
+    color: #0a1128;
+    border: none;
+    padding: 12px 35px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-elegant:hover {
+    background: var(--gold-hover);
+    transform: translateY(-2px);
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 38px;
+    color: var(--gold-primary);
+    margin-bottom: 15px;
+}
+
+.aesthetic-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 25px 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   4. SLIDER MASTER & TABS
+   ========================================== */
+.tabs-header {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: rgba(10, 17, 40, 0.4);
+    padding: 5px;
+    border-radius: 25px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: var(--gold-primary);
+    color: #0a1128;
+    font-weight: 600;
+}
+
+.slider-master {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider-track {
+    display: flex;
+    width: 200%;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slide-pane {
+    width: 50%;
+    flex-shrink: 0;
+    padding: 0 5px;
+}
+
+.indicator-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: var(--gold-primary);
+    width: 20px;
+    border-radius: 10px;
+}
+
+/* ==========================================
+   5. KANDUNGAN HALAMAN UNDANGAN & INFO
+   ========================================== */
+.verse2 {
+    font-family: var(--font-arabic);
+    font-size: 22px;
+    color: var(--gold-primary);
+    margin-bottom: 15px;
+}
+
+.pname {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+h1.pname {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    color: var(--gold-primary);
+    font-weight: normal;
+}
+
+.invite-text, .phrase-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 8px 0;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.countdown-box {
+    background: rgba(10, 17, 40, 0.5);
+    border: 1px solid rgba(229, 193, 88, 0.35);
+    border-radius: 10px;
+    padding: 8px 12px;
+    min-width: 55px;
+}
+
+.countdown-val {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold-primary);
+}
+
+.countdown-lbl {
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.info-pane h3 {
+    font-size: 14px;
+    color: var(--gold-primary);
+    margin-top: 15px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-pane p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.map-grid {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-map {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 15px;
+    font-size: 12px;
+    border: 1px solid var(--card-border);
+    transition: 0.3s;
+}
+
+.btn-map:hover {
+    background: var(--gold-primary);
+    color: #0a1128;
+}
+
+/* ==========================================
+   6. BORANG (RSVP & UCAPAN)
+   ========================================== */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 11px;
+    color: var(--gold-primary);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.rsvp-name-input, .rsvp-count-select, #input-wish-name, #input-wish-msg {
+    width: 100%;
+    padding: 10px 14px;
+    background: rgba(10, 17, 40, 0.5);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.rsvp-name-input:focus, .rsvp-count-select:focus, #input-wish-name:focus, #input-wish-msg:focus {
+    border-color: var(--gold-primary);
+}
+
+.rsvp-count-select option {
+    background: #0a1128;
+    color: #fff;
+}
+
+.wishes-scroller {
+    max-height: 220px;
+    overflow-y: auto;
+    text-align: left;
+    padding-right: 5px;
+}
+
+.wishes-scroller::-webkit-scrollbar {
+    width: 4px;
+}
+
+.wishes-scroller::-webkit-scrollbar-thumb {
+    background: var(--gold-primary);
+    border-radius: 4px;
+}
+
+.wish-item {
+    background: rgba(10, 17, 40, 0.4);
+    border-left: 3px solid var(--gold-primary);
+    padding: 10px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 10px;
+}
+
+.wish-author {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold-primary);
+}
+
+.wish-msg {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 3px;
+    word-break: break-word;
+}
+
+/* ==========================================
+   7. 3D COVERFLOW CAROUSEL (GLIDE REFERENCE)
+   ========================================== */
+.carousel-view {
+    width: 100%;
+    height: 280px;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-3d {
+    width: 160px;
+    height: 220px;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.carousel-frame {
+    position: absolute;
+    width: 160px;
+    height: 220px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(10, 17, 40, 0.8);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 
+                0 0 15px rgba(229, 193, 88, 0.2);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+    left: 0;
+    top: 0;
+}
+
+.carousel-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    pointer-events: none;
+}
+
+/* Navigation Arrows for Carousel */
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: rgba(10, 17, 40, 0.7);
+    border: 1px solid var(--gold-primary);
+    color: var(--gold-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.carousel-nav-btn:hover {
+    background: var(--gold-primary);
+    color: #0a1128;
+}
+
+.carousel-nav-btn.prev { left: 5px; }
+.carousel-nav-btn.next { right: 5px; }
+
+/* ==========================================
+   8. POPUP MODAL
+   ========================================== */
+.popup-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(5, 10, 25, 0.8);
+    backdrop-filter: blur(6px);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.popup-modal-overlay.active {
+    display: flex;
+}
+
+.popup-modal-overlay .aesthetic-card {
+    width: 100%;
+    max-width: 380px;
+}
+
+.contact-row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-row-item:last-child {
+    border-bottom: none;
+}
+
+.contact-info-block {
+    text-align: left;
+}
+
+.contact-name-lbl {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.contact-phone-lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.btn-call-action {
+    background: var(--gold-primary);
+    color: #0a1128;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+/* ==========================================
+   9. GLOBAL BOTTOM NAVIGATION BAR
+   ========================================== */
+.bottom-nav-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: 65px;
+    background: rgba(10, 17, 40, 0.92);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+    border-radius: 20px 20px 0 0;
+}
+
+.nav-link-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 20%;
+}
+
+.nav-link-btn i {
+    font-size: 16px;
+}
+
+.nav-link-btn.active {
+    color: var(--gold-primary);
+}
+
+/* ==========================================
+   10. BUTANG MUZIK TERAPUNG
+   ========================================== */
+#floating-music-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    z-index: 9999;
+    touch-action: none;
+    user-select: none;
+    cursor: grab;
+}
+
+#floating-music-container:active {
+    cursor: grabbing;
+}
+
+.music-ball {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(10, 24, 54, 0.88);
+    border: 2px solid var(--gold-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-primary);
+    font-size: 18px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.music-ball i {
+    display: inline-block;
+}
+
+.music-rotating {
+    animation: spinDisc 4s linear infinite;
+}
+
+.music-paused {
+    animation-play-state: paused !important;
+}
+
+@keyframes spinDisc {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+</style>
+</head>
+<body>
+
+    <!-- Audio Element -->
+    <audio id="wedding-music" loop>
+        <source src="song/song 1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating AssistiveTouch Music Button -->
+    <div id="floating-music-container">
+        <div class="music-ball" id="music-ball-btn">
+            <i class="fa-solid fa-music" id="music-icon"></i>
+        </div>
     </div>
-</section>
-        
 
-</div>
+    <!-- 1. HERO PAGE -->
+    <div id="hero-page" class="page active">
+        <p class="main-title pop-anim pop-delay-1">Undangan Raja Sehari</p>
+        <div class="mogram pop-anim pop-delay-2">
+            <img src="img/initial logo 2.png" alt="Logo Perkahwinan">
+        </div>
+        <div class="couple-names-hero pop-anim pop-delay-3">Shaifullah Ahmad<br>&<br>Suraya Zulkifli</div>
+        <div class="arabic-verse pop-anim pop-delay-4">وَخَلَقۡنَٰكُمۡ أَزۡوَٰجٗا</div>
+        <p class="translation-text pop-anim pop-delay-5">"And We created you in pairs"<br>— Surah An-Naba 78:8 —</p>
+        <button class="btn-elegant pop-anim pop-delay-5" onclick="initiateInvitationSystem()">Buka Undangan</button>
+    </div>
 
-    <!-- Bottom Navigation Bar -->
-    <nav class="bottom-nav">
-        <a href="#undangan" class="nav-item">
-            <span class="nav-icon">🏠</span>
-            <span>Utama</span>
-        </a>
-        <a href="#details" class="nav-item">
-            <span class="nav-icon">📅</span>
-            <span>Majlis</span>
-        </a>
-        <div class="nav-item" onclick="toggleMusic()" style="cursor: pointer;">
-            <div class="music-toggle" id="musicBtn"></div>
-            <span>Muzik</span>
+    <!-- 2. UNDANGAN PAGE -->
+    <div id="undangan-page" class="page">
+        <h2 class="section-title pop-anim pop-delay-1">Undangan</h2>
+        <div class="aesthetic-card pop-anim pop-delay-2">
+            <div class="tabs-header">
+                <button class="tab-btn active" id="tab-undangan-0" onclick="syncGlobalSliders(0)">Bersanding</button>
+                <button class="tab-btn" id="tab-undangan-1" onclick="syncGlobalSliders(1)">Bertandang</button>
+            </div>
+            <div class="slider-master">
+                <div class="slider-track" id="undangan-slider-track">
+                    <!-- Bersanding Content -->
+                    <div class="slide-pane">
+                        <p class="verse2 pop-anim pop-delay-2">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                        <p class="pname pop-anim pop-delay-3">Normizah Binti Mohamed Nor<br>&<br>Keluarga</p>
+                        <p class="invite-text pop-anim pop-delay-3">Dengan penuh kesyukuran menjemput<br>Dato / Datin / Tuan / Puan / Encik / Cik</p> 
+                        <p class="phrase-text pop-anim pop-delay-4">Ke majlis perkahwinan puteri kami</p>
+                        <h1 class="pname pop-anim pop-delay-4">Nur Halida Suraya<br>Binti Zulkifli</h1>
+                        <p class="phrase-text pop-anim pop-delay-5">dengan pilihan hatinya</p>
+                        <h1 class="pname pop-anim pop-delay-5">Mohamad Shaifullah<br>Bin Ahmad Sharafae</h1>
+                    </div>
+                    <!-- Bertandang Content -->
+                    <div class="slide-pane">
+                        <p class="verse2 pop-anim pop-delay-2">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                        <p class="pname pop-anim pop-delay-3">Ahmad Sharafae Bin Jafri<br>&<br>Raja Jamelah Binti Raja Daud</p>
+                        <p class="invite-text pop-anim pop-delay-3">Dengan penuh kesyukuran menjemput<br>Dato / Datin / Tuan / Puan / Encik / Cik</p> 
+                        <p class="phrase-text pop-anim pop-delay-4">Ke majlis perkahwinan putera kami</p>
+                        <h1 class="pname pop-anim pop-delay-4">Mohamad Shaifullah<br>Bin Ahmad Sharafae</h1>
+                        <p class="phrase-text pop-anim pop-delay-5">dengan pilihan hatinya</p>
+                        <h1 class="pname pop-anim pop-delay-5">Nur Halida Suraya<br>Binti Zulkifli</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="indicator-dots">
+                <div class="dot active" id="dot-undangan-0" onclick="syncGlobalSliders(0)"></div>
+                <div class="dot" id="dot-undangan-1" onclick="syncGlobalSliders(1)"></div>
+            </div>
         </div>
-        <a href="#rsvp" class="nav-item">
-            <span class="nav-icon">✍️</span>
-            <span>RSVP</span>
-        </a>
-        <div class="nav-item2" onclick="openContactModal()" style="cursor: pointer;">
-            <span class="nav-icon">📞</span>
-            <span>Hubungi</span>
+    </div>
+
+    <!-- 3. INFO PAGE -->
+    <div id="info-page" class="page">
+        <h2 class="section-title pop-anim pop-delay-1">Butiran Majlis</h2>
+        <div class="aesthetic-card pop-anim pop-delay-2">
+            <div class="tabs-header">
+                <button class="tab-btn active" id="tab-info-0" onclick="syncGlobalSliders(0)">Bersanding</button>
+                <button class="tab-btn" id="tab-info-1" onclick="syncGlobalSliders(1)">Bertandang</button>
+            </div>
+            <div class="slider-master">
+                <div class="slider-track" id="info-slider-track">
+                    <!-- Info Bersanding -->
+                    <div class="slide-pane info-pane">
+                        <div class="countdown-container" id="countdown-bersanding">
+                            <div class="countdown-box"><span class="countdown-val" id="days-s">00</span><span class="countdown-lbl">Hari</span></div>
+                            <div class="countdown-box"><span class="countdown-val" id="hours-s">00</span><span class="countdown-lbl">Jam</span></div>
+                            <div class="countdown-box"><span class="countdown-val" id="screens-s">00</span><span class="countdown-lbl">Min</span></div>
+                            <div class="countdown-box"><span class="countdown-val" id="secs-s">00</span><span class="countdown-lbl">Saat</span></div>
+                        </div>
+                        <h3 class="pop-anim pop-delay-3">Tarikh Majlis</h3>
+                        <p class="pop-anim pop-delay-3">Sabtu, 29 Ogos 2026<br><span style="color:var(--text-muted)">16 Rabiulawal 1448</span></p>
+                        <h3 class="pop-anim pop-delay-4">Aturcara Majlis</h3>
+                        <p class="pop-anim pop-delay-4">12:00 PM - 5:00 PM<br>(Bersanding: 1:00 PM)</p>
+                        <h3 class="pop-anim pop-delay-5">Lokasi</h3>
+                        <p class="pop-anim pop-delay-5">LOT 525, Kg Pohon Buloh,<br>Pasir Mas, Kelantan.</p>
+                        <div class="map-grid pop-anim pop-delay-5">
+                            <a href="https://maps.google.com/?q=LOT+525,+Kg+Pohon+Buloh,+Pasir+Mas,+Kelantan" target="_blank" class="btn-map"><i class="fab fa-google"></i> Google</a>
+                            <a href="https://waze.com/ul?q=LOT+525,+Kg+Pohon+Buloh,+Pasir+Mas,+Kelantan" target="_blank" class="btn-map"><i class="fab fa-waze"></i> Waze</a>
+                        </div>
+                    </div>
+                    <!-- Info Bertandang -->
+                    <div class="slide-pane info-pane">
+                        <div class="countdown-container" id="countdown-bertandang">
+                            <div class="countdown-box"><span class="countdown-val" id="days-t">00</span><span class="countdown-lbl">Hari</span></div>
+                            <div class="countdown-box"><span class="countdown-val" id="hours-t">00</span><span class="countdown-lbl">Jam</span></div>
+                            <div class="countdown-box"><span class="countdown-val" id="screens-t">00</span><span class="countdown-lbl">Min</span></div>
+                            <div class="countdown-box"><span class="countdown-val" id="secs-t">00</span><span class="countdown-lbl">Saat</span></div>
+                        </div>
+                        <h3 class="pop-anim pop-delay-3">Tarikh Majlis</h3>
+                        <p class="pop-anim pop-delay-3">Sabtu, 24 Okt 2026<br><span style="color:var(--text-muted)">13 Jamadilawal 1448</span></p>
+                        <h3 class="pop-anim pop-delay-4">Aturcara Majlis</h3>
+                        <p class="pop-anim pop-delay-4">11:00 AM - 4:30 PM<br>(Bersanding: 11:15 AM)</p>
+                        <h3 class="pop-anim pop-delay-5">Lokasi</h3>
+                        <p class="pop-anim pop-delay-5">Bagan Serai Wedding Hall,<br>Bagan Serai, Perak.</p>
+                        <div class="map-grid pop-anim pop-delay-5">
+                            <a href="https://maps.google.com/?q=Bagan+Serai+Wedding+Hall,+Bagan+Serai,+Perak" target="_blank" class="btn-map"><i class="fab fa-google"></i> Google</a>
+                            <a href="https://waze.com/ul?q=Bagan+Serai+Wedding+Hall,+Bagan+Serai,+Perak" target="_blank" class="btn-map"><i class="fab fa-waze"></i> Waze</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="indicator-dots">
+                <div class="dot active" id="dot-info-0" onclick="syncGlobalSliders(0)"></div>
+                <div class="dot" id="dot-info-1" onclick="syncGlobalSliders(1)"></div>
+            </div>
         </div>
+    </div>
+
+    <!-- 4. RSVP PAGE -->
+    <div id="rsvp-page" class="page">
+        <h2 class="section-title pop-anim pop-delay-1">Kehadiran</h2>
+        <div class="aesthetic-card pop-anim pop-delay-2">
+            <div class="tabs-header">
+                <button class="tab-btn active" id="tab-rsvp-0" onclick="syncGlobalSliders(0)">Bersanding</button>
+                <button class="tab-btn" id="tab-rsvp-1" onclick="syncGlobalSliders(1)">Bertandang</button>
+            </div>
+            <div class="slider-master">
+                <div class="slider-track" id="rsvp-slider-track">
+                    <!-- Form Bersanding -->
+                    <div class="slide-pane">
+                        <form onsubmit="executeRsvpSubmission(event, 'Bersanding')">
+                            <div class="form-group">
+                                <label>Nama Penuh</label>
+                                <input type="text" class="rsvp-name-input" required placeholder="Sila masukkan nama anda">
+                            </div>
+                            <div class="form-group">
+                                <label>Jumlah Kehadiran</label>
+                                <select class="rsvp-count-select" required>
+                                    <option value="1">1 Orang</option>
+                                    <option value="2">2 Orang</option>
+                                    <option value="3">3 Orang</option>
+                                    <option value="4">4 Orang</option>
+                                    <option value="5">5 Orang</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-elegant" style="width:100%">Hantar Pengesahan</button>
+                        </form>
+                    </div>
+                    <!-- Form Bertandang -->
+                    <div class="slide-pane">
+                        <form onsubmit="executeRsvpSubmission(event, 'Bertandang')">
+                            <div class="form-group">
+                                <label>Nama Penuh</label>
+                                <input type="text" class="rsvp-name-input" required placeholder="Sila masukkan nama anda">
+                            </div>
+                            <div class="form-group">
+                                <label>Jumlah Kehadiran</label>
+                                <select class="rsvp-count-select" required>
+                                    <option value="1">1 Orang</option>
+                                    <option value="2">2 Orang</option>
+                                    <option value="3">3 Orang</option>
+                                    <option value="4">4 Orang</option>
+                                    <option value="5">5 Orang</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-elegant" style="width:100%">Hantar Pengesahan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="indicator-dots">
+                <div class="dot active" id="dot-rsvp-0" onclick="syncGlobalSliders(0)"></div>
+                <div class="dot" id="dot-rsvp-1" onclick="syncGlobalSliders(1)"></div>
+            </div>
+        </div>
+        <div class="mogram2 pop-anim pop-delay-3">
+            <img src="img/initial logo 2.png" alt="Logo Perkahwinan">
+        </div>
+    </div>
+
+    <!-- 5. GALLERY PAGE (WITH 3D COVERFLOW CAROUSEL) -->
+    <div id="gallery-page" class="page">
+        <h2 class="section-title pop-anim pop-delay-1">Galeri & Ucapan</h2>
+        <div class="carousel-view pop-anim pop-delay-2" id="3d-gallery-viewport">
+            <button class="carousel-nav-btn prev" onclick="moveCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="carousel-3d" id="carousel-rotation-core">
+                <div class="carousel-frame"><img src="img/g3.jpg"></div>
+                <div class="carousel-frame"><img src="img/g4.jpg"></div>
+                <div class="carousel-frame"><img src="img/g5.jpg"></div>
+                <div class="carousel-frame"><img src="img/g1.jpg"></div>
+                <div class="carousel-frame"><img src="img/g2.jpg"></div>
+
+            </div>
+            <button class="carousel-nav-btn next" onclick="moveCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="aesthetic-card pop-anim pop-delay-3" style="margin-top: 15px;">
+            <h3 class="pop-anim pop-delay-3">Titipkan Ucapan</h3>
+            <div class="form-group" style="margin-top:12px;">
+                <input type="text" id="input-wish-name" placeholder="Nama Anda">
+            </div>
+            <div class="form-group">
+                <input type="text" id="input-wish-msg" placeholder="Selamat Pengantin Baru...">
+            </div>
+            <button class="btn-elegant" style="margin-top:0; padding:10px 24px; font-size:12px;" onclick="addNewWishToList()">Kirim Ucapan</button>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.15); margin:20px 0;">
+            <h3 class="pop-anim pop-delay-4">Ucapan Tetamu</h3>
+            <div class="wishes-scroller" id="render-wishes-box"></div>
+        </div>
+    </div>
+
+    <!-- CONTACT POPUP MODAL -->
+    <div class="popup-modal-overlay" id="contact-popup-element" onclick="toggleContactPopup(false)">
+        <div class="aesthetic-card" onclick="event.stopPropagation()">
+            <h2 class="section-title" >Hubungi Kami</h2>
+            <div class="tabs-header">
+                <button class="tab-btn active" id="tab-contact-0" onclick="syncGlobalSliders(0)">Bersanding</button>
+                <button class="tab-btn" id="tab-contact-1" onclick="syncGlobalSliders(1)">Bertandang</button>
+            </div>
+            <div class="slider-master">
+                <div class="slider-track" id="contact-slider-track">
+                    <div class="slide-pane" id="contact-list-bersanding"></div>
+                    <div class="slide-pane" id="contact-list-bertandang"></div>
+                </div>
+            </div>
+            <div class="indicator-dots">
+                <div class="dot active" id="dot-contact-0" onclick="syncGlobalSliders(0)"></div>
+                <div class="dot" id="dot-contact-1" onclick="syncGlobalSliders(1)"></div>
+            </div>
+            <button class="btn-elegant" style="padding:8px 20px; font-size:11px; margin-top:20px;" onclick="toggleContactPopup(false)">Tutup</button>
+        </div>
+    </div>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bottom-nav-container" id="global-navigation-bar" style="display:none;">
+        <button class="nav-link-btn active" onclick="switchMainPage('undangan-page', this)"><i class="fa-solid fa-envelope-open-text"></i>Undangan</button>
+        <button class="nav-link-btn" onclick="switchMainPage('info-page', this)"><i class="fa-solid fa-calendar-days"></i>Info</button>
+        <button class="nav-link-btn" onclick="switchMainPage('gallery-page', this)"><i class="fa-solid fa-images"></i>Galeri</button>
+        <button class="nav-link-btn" onclick="switchMainPage('rsvp-page', this)"><i class="fa-solid fa-pen-to-square"></i>RSVP</button>
+        <button class="nav-link-btn" onclick="toggleContactPopup(true)"><i class="fa-solid fa-address-book"></i>Telefon</button>
     </nav>
 
-    <!-- Contacts Modal Window -->
- <div id="contactModal" class="modal-overlay" onclick="closeContactModal(event)">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeContactModal(event)">&times;</button>
-            
-            <div class="modal-tabs">
-                <button id="tab1" class="tab-btn active" onclick="switchContactTab(0)">Pihak Perempuan</button>
-                <button id="tab2" class="tab-btn" onclick="switchContactTab(1)">Pihak Lelaki</button>
-            </div>
-
-            <div class="slider-viewport" id="modalViewport">
-                <div id="modalSliderTrack" class="slider-track">
-                    <div id="contact-list-1" class="slide-page"></div>
-                    <div id="contact-list-2" class="slide-page"></div>
-                </div>
-            </div>
-
-            <!-- Contact Modal Indicators (Fixed & Synchronized) -->
-            <div class="swipe-indicators4" id="modalIndicators" style="margin-top: 15px; margin-bottom: 5px;">
-                <span class="dot active" onclick="switchContactTab(0)"></span>
-                <span class="dot" onclick="switchContactTab(1)"></span>
-            </div>
-        </div>
-</div>
-
+    <!-- SYSTEM JAVASCRIPT LOGIC -->
     <script>
-// --- 1. GLOBAL VARIANCE CONFIGURATIONS ---
-let currentScreenIdx = 0;
-let currentIndex = 0;
-let currentTabIdx = 0;
-let currentSide = 'perempuan';
-let countdownInterval;
-let touchStartX = 0;
-let touchEndX = 0;
-let swipeStartX = 0;
-let swipeEndX = 0;
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztqdHA2-j7LQgUsS8VO2MlXH8T0GDIesQorhgtwksxqcDJ1wmsUKHXn6ZvcxppSJeyNA/exec"; 
 
-// 3D Carousel Parameters
-let currAngle = 0;
-const totalCards = 5;
-const rotationAngle = 360 / totalCards;
-const radius = 130; 
+        let globalActiveIndex = 0;
+        let isMusicPlaying = false;
+        let activeCarouselIndex = 0;
 
-const swipeTrack = document.getElementById('swipeTrack');
-const track = document.getElementById('sliderTrack');
-const viewport = document.getElementById('sliderViewport');
-const tabs = document.querySelectorAll('.tab-btn');
+        const dataBersandingContacts = [
+            { name: "Pn. Normizah", phone: "0129543925" },
+            { name: "En. Asmawi", phone: "0126641202" },
+            { name: "Pn. Norhasliza", phone: "0163670277" }
+        ];
+        const dataBertandangContacts = [
+            { name: "En. Sharafae", phone: "0193044161" },
+            { name: "Pn. Jamelah", phone: "01111059133" },
+            { name: "Amirul", phone: "0164064161" }
+        ];
 
-const globalData = {
-    contacts1: [
-        { name: "Pn. Normizah", phone: "0129543925" },
-        { name: "En. Asmawi", phone: "0126641202" },
-        { name: "Pn. Norhasliza", phone: "0163670277" }
-    ],
-    contacts2: [
-        { name: "En. Sharafae", phone: "0193044161" },
-        { name: "Pn. Jamelah", phone: "01111059133" },
-        { name: "Amirul", phone: "0164064161" }
-    ]
-};
-
-const weddingData = {
-    perempuan: {
-        targetDate: "2026-08-29T12:00:00", 
-        dateStr: "Sabtu, 29 Ogos 2026", 
-        hijriStr: "16 Rabiulawal 1448", 
-        timeStr: "12:00 PM - 5:00 PM<br>(Bersanding: 1:00 PM)", 
-        venue: "LOT 525, Kg Pohon Buloh,<br>Pasir Mas, Kelantan.", 
-        mapsUrl: "https://maps.app.goo.gl/K8B81AwwJ2ubPX6b9", 
-        wazeUrl: "https://waze.com/ul?q=LOT+525+Kg+Pohon+Buloh+Pasir+Mas+Kelantan", 
-    },
-    lelaki: {
-        targetDate: "2026-10-24T11:00:00", 
-        dateStr: "Sabtu, 24 Okt 2026", 
-        hijriStr: "13 Jamadilawal 1448", 
-        timeStr: "11:00 AM - 4:30 PM<br>(Bersanding: 11:15 AM)", 
-        venue: "Bagan Serai Wedding Hall,<br>Bagan Serai, Perak.", 
-        mapsUrl: "https://maps.app.goo.gl/G7q1YJeRBPmo55dL8", 
-        wazeUrl: "https://waze.com/ul?q=Bagan+Serai+Wedding+Hall+Perak", 
-    }
-};
-
-const config = {
-    bersandingUrl: 'https://script.google.com/macros/s/AKfycbyjQqRO7LFzsLVOEFa2baeV4fm1wUikeYvAdfIBJr6RYbEb9Bi1jueybDkap8HjXKVT/exec',
-    bertandangUrl: 'https://script.google.com/macros/s/AKfycbyjQqRO7LFzsLVOEFa2baeV4fm1wUikeYvAdfIBJr6RYbEb9Bi1jueybDkap8HjXKVT/exec'
-};
-
-// Paste your Google Apps Script URL for the Carousel Guestbook wishes here
-const WISHES_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
-
-// --- 2. INITIALIZATION ON LOADING ---
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-    if (window.location.hash) {
-        history.replaceState("", document.title, window.location.pathname + window.location.search);
-    }
-    
-    window.scrollTo(0, 0);
-
-    document.getElementById('contact-list-1').innerHTML = generateContactList(globalData.contacts1);
-    document.getElementById('contact-list-2').innerHTML = generateContactList(globalData.contacts2);
-    switchEvent('perempuan');
-    initCarousel();
-    fetchWishes();
-    setupGlobalSwipeHandlers();
-});
-
-// --- 3. SWIPE HANDLING LOGIC ENGINE ---
-function setupGlobalSwipeHandlers() {
-    // Main Container Swipe Tracking (If .swipe-viewport wrapper exists in your core structure)
-    const containerMain = document.querySelector('.mobile-container');
-    if (containerMain) {
-        containerMain.addEventListener('touchstart', e => { swipeStartX = e.changedTouches[0].screenX; }, { passive: true });
-        containerMain.addEventListener('touchend', e => {
-            swipeEndX = e.changedTouches[0].screenX;
-            // Only slide screens if home screen is already opened/revealed
-            if (document.body.classList.contains('revealed')) {
-                if (swipeStartX - swipeEndX > 60 && currentScreenIdx < 1) goToScreen(currentScreenIdx + 1);
-                if (swipeEndX - swipeStartX > 60 && currentScreenIdx > 0) goToScreen(currentScreenIdx - 1);
-            }
-        }, { passive: true });
-    }
-
-    viewport.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-    viewport.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        const distance = touchStartX - touchEndX;
-        if (distance > 50 && currentIndex === 0) switchPage(1);
-        if (distance < -50 && currentIndex === 1) switchPage(0);
-    }, { passive: true });
-
-    const swipeZone = document.getElementById('details');
-    swipeZone.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-    swipeZone.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        const distanceX = touchEndX - touchStartX;
-        if (distanceX < -50 && currentSide === 'perempuan') switchEvent('lelaki');
-        if (distanceX > 50 && currentSide === 'lelaki') switchEvent('perempuan');
-    }, { passive: true });
-
-    const modalVp = document.getElementById('modalViewport');
-    modalVp.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-    modalVp.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        if (touchStartX - touchEndX > 50) switchContactTab(1);
-        if (touchEndX - touchStartX > 50) switchContactTab(0);
-    }, { passive: true });
-}
-
-function goToScreen(index) {
-    currentScreenIdx = index;
-    swipeTrack.style.transform = `translateX(-${index * 50}%)`;
-    document.querySelectorAll('#mainIndicators .dot').forEach((dot, idx) => dot.classList.toggle('active', idx === index));
-}
-
-function switchPage(index) {
-    currentIndex = index;
-    track.style.transform = `translateX(-${index * 50}%)`;
-    document.querySelectorAll('.tabs .tab-btn').forEach((tab, idx) => tab.classList.toggle('active', idx === index));
-    document.querySelectorAll('#rsvpIndicators .dot').forEach((dot, idx) => dot.classList.toggle('active', idx === index));
-}
-
-// --- 4. CONTACTS GENERATOR & MODAL CONTROLLER ---
-function generateContactList(contacts) {
-    return contacts.map(c => {
-        const cleanPhone = c.phone.replace(/\s+/g, '');
-        const waPhone = cleanPhone.startsWith('6') ? cleanPhone : `6${cleanPhone}`;
-        return `
-            <div class="contact-row">
-                <span class="contact-name">${c.name}</span>
-                <div class="contact-actions">
-                    <a href="tel:${cleanPhone}">Call</a>
-                    <a href="https://wa.me/${waPhone}" target="_blank">WhatsApp</a>
-                </div>
-            </div>`;
-    }).join('');
-}
-
-function openContactModal() {
-    document.getElementById("contactModal").style.display = "flex";
-    switchContactTab(0); 
-}
-
-function closeContactModal(event) {
-    if (event.target.classList.contains('modal-overlay') || event.target.classList.contains('close-btn')) {
-        document.getElementById("contactModal").style.display = "none";
-    }
-}
-
-function switchContactTab(index) {
-    currentTabIdx = index;
-    const modalTrack = document.getElementById("modalSliderTrack");
-    document.getElementById("tab1").classList.toggle("active", index === 0);
-    document.getElementById("tab2").classList.toggle("active", index === 1);
-    modalTrack.style.transform = `translateX(-${index * 50}%)`;
-    document.querySelectorAll('#modalIndicators .dot').forEach((dot, idx) => dot.classList.toggle('active', idx === index));
-}
-
-// --- 5. AUDIO SYSTEM ENGINE ---
-function openInvitation() {
-    document.body.classList.remove('locked');
-    document.body.classList.add('revealed');
-    
-    // Smooth scrolling down to invite track view bounds
-    setTimeout(() => {
-        document.getElementById('undangan').scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-
-    // Dynamic fallback music trigger setup
-    const audio = document.getElementById('weddingMusic');
-    if (audio) {
-        audio.play().then(() => {
-            const musicBtn = document.getElementById('musicBtn');
-            if(musicBtn) musicBtn.classList.add('playing'); 
-        }).catch(err => console.log("Audio contextual block: ", err));
-    }
-}
-
-function toggleMusic() {
-    const audio = document.getElementById('weddingMusic');
-    const musicBtn = document.getElementById('musicBtn');
-    if (!audio) return;
-    
-    if (audio.paused) {
-        audio.play().then(() => musicBtn?.classList.add('playing'))
-        .catch(err => console.log("Playback blocked: ", err));
-    } else {
-        audio.pause();
-        musicBtn?.classList.remove('playing');
-    }
-}
-
-// --- 6. DETAILS CARD SWITCHER & COUNTDOWN ---
-function switchEvent(side) {
-    currentSide = side;
-    document.querySelectorAll('#details .toggle-btn').forEach((btn, idx) => {
-        btn.classList.toggle('active', (side === 'perempuan' && idx === 0) || (side === 'lelaki' && idx === 1));
-    });
-    
-    document.querySelectorAll('#detailIndicators .dot').forEach((dot, idx) => {
-        dot.classList.toggle('active', (side === 'perempuan' && idx === 0) || (side === 'lelaki' && idx === 1));
-    });
-    
-    const data = weddingData[side];
-    document.getElementById('event-info').innerHTML = `
-        <div class="info-label">Tarikh Majlis</div>
-        <div class="info-value">${data.dateStr}<br><span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">${data.hijriStr}</span></div>
-        <div class="info-label">Aturcara Majlis</div>
-        <div class="info-value">${data.timeStr}</div>
-        <div class="info-label">Lokasi</div>
-        <div class="info-value">${data.venue}</div>`;
-
-    document.getElementById('go-maps').href = data.mapsUrl;
-    document.getElementById('go-waze').href = data.wazeUrl;
-
-    clearInterval(countdownInterval);
-    startCountdown(data.targetDate);
-}
-
-function startCountdown(dateString) {
-    const targetTime = new Date(dateString).getTime();
-    const updateTimer = () => {
-        const difference = targetTime - new Date().getTime();
-        if (difference <= 0) {
-            ['days','hours','mins','secs'].forEach(id => document.getElementById(id).innerText = "00");
-            clearInterval(countdownInterval);
-            return;
-        }
-        const d = Math.floor(difference / 86400000);
-        const h = Math.floor((difference % 86400000) / 3600000);
-        const m = Math.floor((difference % 3600000) / 60000);
-        const s = Math.floor((difference % 60000) / 1000);
-
-        document.getElementById('days').innerText = d < 10 ? '0' + d : d;
-        document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-        document.getElementById('mins').innerText = m < 10 ? '0' + m : m;
-        document.getElementById('secs').innerText = s < 10 ? '0' + s : s;
-    };
-    updateTimer();
-    countdownInterval = setInterval(updateTimer, 1000);
-}
-
-// --- 7. RSVP FORM SUBMISSION SYSTEM ---
-function handleFormSubmit(formId, targetUrl) {
-    const form = document.getElementById(formId);
-    if (!form) return;
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        const submitBtn = form.querySelector('.submit-btn');
-        submitBtn.disabled = true;
-        submitBtn.innerText = 'Menghantar...';
-
-        fetch(targetUrl, { method: 'POST', body: new FormData(form) })
-        .then(() => {
-            alert('Terima kasih! RSVP anda berjaya dihantar.');
-            form.reset();
-        })
-        .catch(err => {
-            console.error(err);
-            alert('Sesuatu tidak kena. Sila cuba lagi.');
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.innerText = 'Sahkan Kehadiran';
+        document.addEventListener('DOMContentLoaded', () => {
+            initAssistiveTouchMusicBall();
         });
-    });
-}
-handleFormSubmit('bersandingForm', config.bersandingUrl);
-handleFormSubmit('bertandangForm', config.bertandangUrl);
 
-// --- 8. FUTURISTIC CAROUSEL & LIVE GUESTBOOK ---
-function initCarousel() {
-    const cards = document.querySelectorAll('.carousel-card');
-    cards.forEach((card, idx) => {
-        const angle = idx * rotationAngle;
-        card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
-    });
-}
+        function initiateInvitationSystem() {
+            document.getElementById('hero-page').classList.remove('active');
+            
+            switchMainPage('undangan-page', document.querySelector('.nav-link-btn'));
+            document.getElementById('global-navigation-bar').style.display = 'flex';
+            
+            const audio = document.getElementById('wedding-music');
+            audio.play().then(() => {
+                isMusicPlaying = true;
+                updateMusicStateUI(true);
+            }).catch(e => console.log('Autoplay disekat oleh pelayar:', e));
 
-function rotateCarousel(direction) {
-    currAngle += direction * -rotationAngle;
-    document.getElementById('carousel').style.transform = `rotateY(${currAngle}deg)`;
-}
-
-async function fetchWishes() {
-    const feed = document.getElementById('wishesFeed');
-    if (!feed) return;
-    feed.innerHTML = '<div style="text-align:center; color:var(--text-muted); font-size:0.9rem; padding: 20px;">Memuatkan ucapan...</div>';
-    
-    if (WISHES_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
-        feed.innerHTML = '<div style="text-align:center; color:var(--text-muted); font-size:0.85rem; padding: 20px;">Sila masukkan Apps Script URL untuk memuatkan ucapan.</div>';
-        return;
-    }
-
-    try {
-        const response = await fetch(WISHES_SCRIPT_URL);
-        const wishes = await response.json();
-        feed.innerHTML = '';
-        
-        if (!wishes || wishes.length === 0) {
-            feed.innerHTML = '<div style="text-align:center; color:var(--text-muted); font-size:0.85rem; padding: 20px;">Belum ada ucapan lagi. Jadilah yang pertama!</div>';
-            return;
+            renderContactLists();
+            fetchLiveWishes(); 
+            initializeThreeDCarouselEngine();
+            initializeSwipeGesturesForSliders();
+            startCountdownTimers();
         }
 
-        wishes.forEach(wish => {
-            let timeDisplay = "Baru-baru ini";
-            if (wish.timestamp) {
-                const date = new Date(wish.timestamp);
-                timeDisplay = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) + ' | ' + date.toLocaleDateString();
+        /* --- LOGIK ASSISTIVETOUCH BALL & MUZIK --- */
+        function initAssistiveTouchMusicBall() {
+            const ballContainer = document.getElementById('floating-music-container');
+            const audio = document.getElementById('wedding-music');
+            
+            let isDragging = false;
+            let startX = 0, startY = 0;
+            let initialLeft = 0, initialTop = 0;
+            let hasMoved = false;
+
+            ballContainer.addEventListener('click', () => {
+                if (hasMoved) return;
+                toggleAudioState();
+            });
+
+            function toggleAudioState() {
+                if (isMusicPlaying) {
+                    audio.pause();
+                    isMusicPlaying = false;
+                    updateMusicStateUI(false);
+                } else {
+                    audio.play().then(() => {
+                        isMusicPlaying = true;
+                        updateMusicStateUI(true);
+                    }).catch(e => console.log(e));
+                }
             }
-            feed.innerHTML += `
-                <div class="wish-bubble">
-                    <div class="wish-header">
-                        <span class="wish-name">${escapeHTML(wish.name)}</span>
-                        <span class="wish-time">${timeDisplay}</span>
+
+            const onStart = (e) => {
+                isDragging = true;
+                hasMoved = false;
+                ballContainer.style.transition = 'none';
+
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+                startX = clientX;
+                startY = clientY;
+
+                const rect = ballContainer.getBoundingClientRect();
+                initialLeft = rect.left;
+                initialTop = rect.top;
+            };
+
+            const onMove = (e) => {
+                if (!isDragging) return;
+
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+                const deltaX = clientX - startX;
+                const deltaY = clientY - startY;
+
+                if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+                    hasMoved = true;
+                }
+
+                let newLeft = initialLeft + deltaX;
+                let newTop = initialTop + deltaY;
+
+                const maxLeft = window.innerWidth - ballContainer.offsetWidth;
+                const maxTop = window.innerHeight - ballContainer.offsetHeight;
+
+                newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
+                newTop = Math.max(10, Math.min(newTop, maxTop - 10));
+
+                ballContainer.style.left = `${newLeft}px`;
+                ballContainer.style.top = `${newTop}px`;
+                ballContainer.style.right = 'auto'; 
+            };
+
+            const onEnd = () => {
+                if (!isDragging) return;
+                isDragging = false;
+
+                if (hasMoved) {
+                    ballContainer.style.transition = 'left 0.3s cubic-bezier(0.25, 1, 0.5, 1), top 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+                    const currentLeft = parseFloat(ballContainer.style.left);
+                    const screenWidth = window.innerWidth;
+                    const ballWidth = ballContainer.offsetWidth;
+
+                    const snapMargin = 15;
+                    if (currentLeft + ballWidth / 2 < screenWidth / 2) {
+                        ballContainer.style.left = `${snapMargin}px`;
+                    } else {
+                        ballContainer.style.left = `${screenWidth - ballWidth - snapMargin}px`;
+                    }
+                }
+            };
+
+            ballContainer.addEventListener('touchstart', onStart, {passive: true});
+            window.addEventListener('touchmove', onMove, {passive: true});
+            window.addEventListener('touchend', onEnd);
+
+            ballContainer.addEventListener('mousedown', onStart);
+            window.addEventListener('mousemove', onMove);
+            window.addEventListener('mouseup', onEnd);
+        }
+
+        function updateMusicStateUI(playing) {
+            const musicIcon = document.getElementById('music-icon');
+            if (playing) {
+                musicIcon.classList.remove('music-paused');
+                musicIcon.classList.add('music-rotating');
+            } else {
+                musicIcon.classList.add('music-paused');
+            }
+        }
+
+        function syncGlobalSliders(targetIndex) {
+            globalActiveIndex = targetIndex;
+            const percentage = targetIndex * 50;
+            const tracks = ['undangan-slider-track', 'info-slider-track', 'rsvp-slider-track', 'contact-slider-track'];
+
+            tracks.forEach(t => {
+                const el = document.getElementById(t);
+                if (el) el.style.transform = `translateX(-${percentage}%)`;
+            });
+
+            ['undangan', 'info', 'rsvp', 'contact'].forEach(type => {
+                const t0 = document.getElementById(`tab-${type}-0`);
+                const t1 = document.getElementById(`tab-${type}-1`);
+                if (t0 && t1) {
+                    t0.classList.toggle('active', targetIndex === 0);
+                    t1.classList.toggle('active', targetIndex === 1);
+                }
+                const d0 = document.getElementById(`dot-${type}-0`);
+                const d1 = document.getElementById(`dot-${type}-1`);
+                if (d0 && d1) {
+                    d0.classList.toggle('active', targetIndex === 0);
+                    d1.classList.toggle('active', targetIndex === 1);
+                }
+            });
+        }
+
+        function initializeSwipeGesturesForSliders() {
+            ['undangan-page', 'info-page', 'rsvp-page', 'contact-popup-element'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                let startX = 0;
+                el.addEventListener('touchstart', e => { startX = e.changedTouches[0].screenX; }, {passive:true});
+                el.addEventListener('touchend', e => {
+                    let endX = e.changedTouches[0].screenX;
+                    if (startX - endX > 60 && globalActiveIndex === 0) syncGlobalSliders(1);
+                    else if (endX - startX > 60 && globalActiveIndex === 1) syncGlobalSliders(0);
+                }, {passive:true});
+            });
+        }
+
+        function switchMainPage(pageId, elementNavRef) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.remove('active');
+                void targetPage.offsetWidth; // Reflow reset for animation restart
+                targetPage.classList.add('active');
+            }
+
+            if (elementNavRef) {
+                document.querySelectorAll('.nav-link-btn').forEach(b => b.classList.remove('active'));
+                elementNavRef.classList.add('active');
+            }
+        }
+
+        function toggleContactPopup(shouldOpen) {
+            const modal = document.getElementById('contact-popup-element');
+            if (shouldOpen) {
+                modal.classList.add('active');
+                syncGlobalSliders(globalActiveIndex);
+            } else {
+                modal.classList.remove('active');
+            }
+        }
+
+        function renderContactLists() {
+            const inject = (id, data) => {
+                document.getElementById(id).innerHTML = data.map(c => `
+                    <div class="contact-row-item">
+                        <div class="contact-info-block">
+                            <div class="contact-name-lbl">${c.name}</div>
+                            <div class="contact-phone-lbl">${c.phone}</div>
+                        </div>
+                        <a href="tel:${c.phone}" class="btn-call-action">Hubungi</a>
                     </div>
-                    <div class="wish-text">${escapeHTML(wish.message)}</div>
-                </div>`;
-        });
-    } catch (error) {
-        console.error("Error fetching wishes:", error);
-        feed.innerHTML = '<div style="text-align:center; color:#ea4335; font-size:0.85rem; padding: 20px;">Gagal memuatkan ucapan live feed.</div>';
-    }
-}
+                `).join('');
+            };
+            inject('contact-list-bersanding', dataBersandingContacts);
+            inject('contact-list-bertandang', dataBertandangContacts);
+        }
 
-async function handleWishSubmit(e) {
-    e.preventDefault();
-    const nameInput = document.getElementById('guestName');
-    const msgInput = document.getElementById('guestMessage');
-    const submitBtn = e.target.querySelector('.btn-submit');
-    if (!nameInput || !msgInput || !submitBtn) return;
+        function startCountdownTimers() {
+            const dates = { sanding: new Date("Aug 29, 2026 12:00:00").getTime(), tandang: new Date("Oct 24, 2026 11:00:00").getTime() };
+            setInterval(() => {
+                const now = new Date().getTime();
+                let diffS = dates.sanding - now;
+                if (diffS > 0) {
+                    document.getElementById('days-s').innerText = String(Math.floor(diffS / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                    document.getElementById('hours-s').innerText = String(Math.floor((diffS % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                    document.getElementById('screens-s').innerText = String(Math.floor((diffS % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                    document.getElementById('secs-s').innerText = String(Math.floor((diffS % (1000 * 60)) / 1000)).padStart(2, '0');
+                }
+                let diffT = dates.tandang - now;
+                if (diffT > 0) {
+                    document.getElementById('days-t').innerText = String(Math.floor(diffT / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                    document.getElementById('hours-t').innerText = String(Math.floor((diffT % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                    document.getElementById('screens-t').innerText = String(Math.floor((diffT % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                    document.getElementById('secs-t').innerText = String(Math.floor((diffT % (1000 * 60)) / 1000)).padStart(2, '0');
+                }
+            }, 1000);
+        }
 
-    if (WISHES_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
-        alert("Sila masukkan Apps Script URL terlebih dahulu!");
-        return;
-    }
+        // --- GOOGLE SHEET LIVE CONNECTIVITY ACTIONS ---
+        function fetchLiveWishes() {
+            const box = document.getElementById('render-wishes-box');
+            box.innerHTML = '<div style="text-align:center; font-size:12px; color:var(--text-muted)">Memuatkan ucapan...</div>';
 
-    const payload = {
-        name: nameInput.value.trim(),
-        message: msgInput.value.trim()
-    };
+            fetch(SCRIPT_URL)
+                .then(res => res.json())
+                .then(data => {
+                    box.innerHTML = '';
+                    if(!data || data.length === 0) {
+                        box.innerHTML = '<div style="text-align:center; font-size:12px; color:var(--text-muted)">Belum ada ucapan lagi.</div>';
+                        return;
+                    }
+                    const latestWishes = data.slice(-10).reverse();
+                    latestWishes.forEach(w => {
+                        const item = document.createElement('div');
+                        item.className = 'wish-item';
+                        item.innerHTML = `
+                            <div class="wish-author">${escapeSpecialHTML(w.name)}</div>
+                            <div class="wish-msg">${escapeSpecialHTML(w.msg)}</div>
+                        `;
+                        box.appendChild(item);
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    box.innerHTML = '<div style="text-align:center; font-size:12px; color:red">Gagal memuatkan ucapan.</div>';
+                });
+        }
 
-    submitBtn.innerText = "Menghantar...";
-    submitBtn.disabled = true;
+        function addNewWishToList() {
+            const nameEl = document.getElementById('input-wish-name');
+            const msgEl = document.getElementById('input-wish-msg');
+            const name = nameEl.value.trim();
+            const message = msgEl.value.trim();
 
-    try {
-        await fetch(WISHES_SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        });
+            if (!name || !message) {
+                alert('Sila lengkapkan nama dan ruangan ucapan.');
+                return;
+            }
 
-        nameInput.value = '';
-        msgInput.value = '';
-        
-        setTimeout(() => {
-            submitBtn.innerText = "Kirim Ucapan";
-            submitBtn.disabled = false;
-            fetchWishes();
-        }, 1200);
-    } catch (error) {
-        console.error("Error submitting wish:", error);
-        alert("Gagal menghantar ucapan. Sila cuba lagi.");
-        submitBtn.innerText = "Kirim Ucapan";
-        submitBtn.disabled = false;
-    }
-}
+            const btn = document.querySelector("button[onclick='addNewWishToList()']");
+            btn.innerText = "Mengirim...";
+            btn.disabled = true;
 
-function escapeHTML(str) {
-    return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
-}
+            const postUrl = `${SCRIPT_URL}?action=ucapan&name=${encodeURIComponent(name)}&message=${encodeURIComponent(message)}`;
+
+            fetch(postUrl, { method: 'POST' })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.result === 'success') {
+                        nameEl.value = '';
+                        msgEl.value = '';
+                        fetchLiveWishes();
+                    } else {
+                        alert('Ralat sistem Google Sheet. Sila cuba lagi.');
+                    }
+                })
+                .catch(err => alert('Ralat sambungan: ' + err))
+                .finally(() => {
+                    btn.innerText = "Kirim Ucapan";
+                    btn.disabled = false;
+                });
+        }
+
+        function executeRsvpSubmission(event, modeLabel) {
+            event.preventDefault();
+            const form = event.target;
+            const btn = form.querySelector("button[type='submit']");
+            const name = form.querySelector('.rsvp-name-input').value.trim();
+            const count = form.querySelector('.rsvp-count-select').value;
+
+            btn.innerText = "Memproses...";
+            btn.disabled = true;
+
+            const postUrl = `${SCRIPT_URL}?action=rsvp&type=${encodeURIComponent(modeLabel)}&name=${encodeURIComponent(name)}&count=${encodeURIComponent(count)}`;
+
+            fetch(postUrl, { method: 'POST' })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.result === 'success') {
+                        alert(`Terima kasih ${name}! Kehadiran (${count} pax) ke Majlis ${modeLabel} berjaya direkodkan.`);
+                        form.reset();
+                    } else {
+                        alert('Gagal merekodkan RSVP. Sila cuba lagi.');
+                    }
+                })
+                .catch(err => alert('Ralat sambungan API: ' + err))
+                .finally(() => {
+                    btn.innerText = "Hantar Pengesahan";
+                    btn.disabled = false;
+                });
+        }
+
+        /* --- LOGIK 3D COVERFLOW CAROUSEL ENGINE --- */
+        function initializeThreeDCarouselEngine() {
+            updateCoverflowLayout();
+
+            const view = document.getElementById('3d-gallery-viewport');
+            let dragStart = 0;
+            view.addEventListener('touchstart', e => { dragStart = e.changedTouches[0].screenX; }, {passive:true});
+            view.addEventListener('touchend', e => {
+                let delta = dragStart - e.changedTouches[0].screenX;
+                if (delta > 40) moveCarousel(1);
+                else if (delta < -40) moveCarousel(-1);
+            }, {passive:true});
+        }
+
+        function moveCarousel(direction) {
+            const frames = document.querySelectorAll('.carousel-frame');
+            activeCarouselIndex += direction;
+            if (activeCarouselIndex < 0) activeCarouselIndex = frames.length - 1;
+            if (activeCarouselIndex >= frames.length) activeCarouselIndex = 0;
+            updateCoverflowLayout();
+        }
+
+        function updateCoverflowLayout() {
+            const frames = document.querySelectorAll('.carousel-frame');
+            const total = frames.length;
+
+            frames.forEach((frame, idx) => {
+                let offset = idx - activeCarouselIndex;
+
+                // Memastikan kitaran gelung indeks
+                if (offset < -Math.floor(total / 2)) offset += total;
+                if (offset > Math.floor(total / 2)) offset -= total;
+
+                if (offset === 0) {
+                    // Kad Aktif di Tengah
+                    frame.style.transform = `translateX(0px) translateZ(100px) rotateY(0deg) scale(1)`;
+                    frame.style.opacity = '1';
+                    frame.style.zIndex = '10';
+                } else if (offset === -1) {
+                    // Kad di Kiri
+                    frame.style.transform = `translateX(-110px) translateZ(-40px) rotateY(35deg) scale(0.85)`;
+                    frame.style.opacity = '0.7';
+                    frame.style.zIndex = '5';
+                } else if (offset === 1) {
+                    // Kad di Kanan
+                    frame.style.transform = `translateX(110px) translateZ(-40px) rotateY(-35deg) scale(0.85)`;
+                    frame.style.opacity = '0.7';
+                    frame.style.zIndex = '5';
+                } else {
+                    // Kad yang Lebih Jauh
+                    const dir = offset > 0 ? 1 : -1;
+                    frame.style.transform = `translateX(${dir * 180}px) translateZ(-120px) rotateY(${-dir * 50}deg) scale(0.6)`;
+                    frame.style.opacity = '0';
+                    frame.style.zIndex = '1';
+                }
+            });
+        }
+
+        function escapeSpecialHTML(t) {
+            const m = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return t.replace(/[&<>"']/g, k => m[k]);
+        }
     </script>
 </body>
 </html>
