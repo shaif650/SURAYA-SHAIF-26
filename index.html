@@ -714,14 +714,6 @@ h1.pname {
     cursor: grabbing;
 }
 
-#music-icon {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    display: block;
-    pointer-events: none;
-}
-
 .music-ball {
     width: 100%;
     height: 100%;
@@ -734,7 +726,16 @@ h1.pname {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#music-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
 }
 
 .music-rotating {
@@ -762,7 +763,7 @@ h1.pname {
     <!-- Floating AssistiveTouch Music Button -->
     <div id="floating-music-container">
         <div class="music-ball" id="music-ball-btn">
-            <img src="img/g35.png" alt="Muzik" id="music-icon">
+            <img src="img/g35.png" id="music-icon" alt="Muzik">
         </div>
     </div>
 
@@ -1039,7 +1040,7 @@ h1.pname {
             startCountdownTimers();
         }
 
-        /* --- LOGIK ASSISTIVETOUCH BALL, MAGNETIC SNAP & MUZIK --- */
+        /* --- LOGIK ASSISTIVETOUCH BALL & MUZIK --- */
         function initAssistiveTouchMusicBall() {
             const ballContainer = document.getElementById('floating-music-container');
             const audio = document.getElementById('wedding-music');
@@ -1047,7 +1048,12 @@ h1.pname {
             let isDragging = false;
             let startX = 0, startY = 0;
             let initialLeft = 0, initialTop = 0;
-            let dragDistance = 0;
+            let hasMoved = false;
+
+            ballContainer.addEventListener('click', () => {
+                if (hasMoved) return;
+                toggleAudioState();
+            });
 
             function toggleAudioState() {
                 if (isMusicPlaying) {
@@ -1058,13 +1064,13 @@ h1.pname {
                     audio.play().then(() => {
                         isMusicPlaying = true;
                         updateMusicStateUI(true);
-                    }).catch(e => console.log('Playback error:', e));
+                    }).catch(e => console.log(e));
                 }
             }
 
             const onStart = (e) => {
                 isDragging = true;
-                dragDistance = 0;
+                hasMoved = false;
                 ballContainer.style.transition = 'none';
 
                 const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
@@ -1087,12 +1093,15 @@ h1.pname {
                 const deltaX = clientX - startX;
                 const deltaY = clientY - startY;
 
-                dragDistance = Math.hypot(deltaX, deltaY);
+                if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+                    hasMoved = true;
+                }
 
                 let newLeft = initialLeft + deltaX;
                 let newTop = initialTop + deltaY;
 
                 const navBarHeight = 65; 
+
                 const maxLeft = window.innerWidth - ballContainer.offsetWidth;
                 const maxTop = window.innerHeight - ballContainer.offsetHeight - navBarHeight;
 
@@ -1108,24 +1117,18 @@ h1.pname {
                 if (!isDragging) return;
                 isDragging = false;
 
-                // Treat micro-movements (< 5px) as a play/pause click
-                if (dragDistance < 5) {
-                    toggleAudioState();
-                    return;
-                }
+                if (hasMoved) {
+                    ballContainer.style.transition = 'left 0.3s cubic-bezier(0.25, 1, 0.5, 1), top 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+                    const currentLeft = parseFloat(ballContainer.style.left);
+                    const screenWidth = window.innerWidth;
+                    const ballWidth = ballContainer.offsetWidth;
 
-                // --- MAGNETIC SNAP LOGIC ---
-                ballContainer.style.transition = 'left 0.3s cubic-bezier(0.25, 1, 0.5, 1), top 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
-                
-                const currentLeft = ballContainer.getBoundingClientRect().left;
-                const screenWidth = window.innerWidth;
-                const ballWidth = ballContainer.offsetWidth;
-                const snapMargin = 15;
-
-                if (currentLeft + ballWidth / 2 < screenWidth / 2) {
-                    ballContainer.style.left = `${snapMargin}px`;
-                } else {
-                    ballContainer.style.left = `${screenWidth - ballWidth - snapMargin}px`;
+                    const snapMargin = 15;
+                    if (currentLeft + ballWidth / 2 < screenWidth / 2) {
+                        ballContainer.style.left = `${snapMargin}px`;
+                    } else {
+                        ballContainer.style.left = `${screenWidth - ballWidth - snapMargin}px`;
+                    }
                 }
             };
 
@@ -1139,14 +1142,12 @@ h1.pname {
         }
 
         function updateMusicStateUI(playing) {
-            const musicBall = document.getElementById('music-ball-btn');
-            if (!musicBall) return;
-
+            const musicIcon = document.getElementById('music-icon');
             if (playing) {
-                musicBall.classList.remove('music-paused');
-                musicBall.classList.add('music-rotating');
+                musicIcon.classList.remove('music-paused');
+                musicIcon.classList.add('music-rotating');
             } else {
-                musicBall.classList.add('music-paused');
+                musicIcon.classList.add('music-paused');
             }
         }
 
