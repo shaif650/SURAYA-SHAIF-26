@@ -452,9 +452,8 @@ h1.pname {
    ========================================== */
 .carousel-view {
     width: 100%;
-    min-width: 320px;
     max-width: 600px;
-    height: 340px;
+    height: 350px;
     perspective: 1000px;
     display: flex;
     justify-content: center;
@@ -758,6 +757,13 @@ h1.pname {
 @keyframes spinDisc {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 360px) {
+  .carousel-section {
+    transform: scale(0.85); /* Scales down the carousel to 85% */
+    transform-origin: center center;
+  }
 }
 
 </style>
