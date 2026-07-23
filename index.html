@@ -452,8 +452,8 @@ h1.pname {
    ========================================== */
 .carousel-view {
     width: 100%;
-    max-width: 600px;
-    height: 350px;
+    max-width: 480px;
+    height: 300px;
     perspective: 1000px;
     display: flex;
     justify-content: center;
@@ -759,12 +759,6 @@ h1.pname {
     100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 360px) {
-  .carousel-section {
-    transform: scale(0.85); /* Scales down the carousel to 85% */
-    transform-origin: center center;
-  }
-}
 
 </style>
 </head>
@@ -1439,38 +1433,46 @@ function updateCoverflowLayout() {
     const total = frames.length;
     if (!total) return;
 
+    // Dynamically calculate horizontal spacing based on viewport width
+    const screenWidth = window.innerWidth;
+    const isNarrow = screenWidth <= 380;
+    
+    // Use tighter horizontal offsets on small screens
+    const sideOffset = isNarrow ? 85 : 110; 
+    const bgOffset = isNarrow ? 120 : 150;  
+
     frames.forEach((frame, idx) => {
         let offset = idx - activeCarouselIndex;
 
-        // Loop calculations around the carousel length
+        // Loop calculations
         if (offset < -Math.floor(total / 2)) offset += total;
         if (offset > Math.floor(total / 2)) offset -= total;
 
         if (offset === 0) {
-            // Active Center Card (Fully visible, centered, clear gold border depth)
-            frame.style.transform = `translateX(0px) translateZ(120px) rotateY(0deg) scale(1)`;
+            // Active Center Card
+            frame.style.transform = `translateX(0px) translateZ(100px) rotateY(0deg) scale(1)`;
             frame.style.opacity = '1';
             frame.style.filter = 'brightness(100%)';
             frame.style.zIndex = '20';
             frame.style.pointerEvents = 'auto';
         } else if (offset === -1) {
-            // Left Card (Proportional offset for max 480px container)
-            frame.style.transform = `translateX(-115px) translateZ(-30px) rotateY(32deg) scale(0.85)`;
-            frame.style.opacity = '0.75';
+            // Left Immediate Card
+            frame.style.transform = `translateX(-${sideOffset}px) translateZ(-20px) rotateY(30deg) scale(0.85)`;
+            frame.style.opacity = '0.8';
             frame.style.filter = 'brightness(75%)';
             frame.style.zIndex = '10';
             frame.style.pointerEvents = 'none';
         } else if (offset === 1) {
-            // Right Card (Proportional offset for max 480px container)
-            frame.style.transform = `translateX(115px) translateZ(-30px) rotateY(-32deg) scale(0.85)`;
-            frame.style.opacity = '0.75';
+            // Right Immediate Card
+            frame.style.transform = `translateX(${sideOffset}px) translateZ(-20px) rotateY(-30deg) scale(0.85)`;
+            frame.style.opacity = '0.8';
             frame.style.filter = 'brightness(75%)';
             frame.style.zIndex = '10';
             frame.style.pointerEvents = 'none';
         } else {
-            // Hidden/Background Cards (Pushed further back to prevent horizontal overflow/scrollbars)
+            // Hidden/Background Cards
             const dir = offset > 0 ? 1 : -1;
-            frame.style.transform = `translateX(${dir * 160}px) translateZ(-140px) rotateY(${-dir * 45}deg) scale(0.65)`;
+            frame.style.transform = `translateX(${dir * bgOffset}px) translateZ(-120px) rotateY(${-dir * 45}deg) scale(0.65)`;
             frame.style.opacity = '0';
             frame.style.filter = 'brightness(40%)';
             frame.style.zIndex = '1';
@@ -1478,7 +1480,6 @@ function updateCoverflowLayout() {
         }
     });
 }
-
         function escapeSpecialHTML(t) {
             const m = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
             return t.replace(/[&<>"']/g, k => m[k]);
