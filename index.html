@@ -75,59 +75,19 @@ body {
 .page.active .pop-delay-4 { animation-delay: 0.55s; }
 .page.active .pop-delay-5 { animation-delay: 0.7s; }
 
-/* ==========================================
-   X-AXIS SLIDE ANIMATIONS (BERSANDING <-> BERTANDANG)
-   ========================================== */
-@keyframes slideInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.slide-pane-anim-right {
-    animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.slide-pane-anim-left {
-    animation: slideInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
 /* Container untuk memastikan reka bentuk kelihatan seperti aplikasi mudah alih */
 .page {
     display: none;
     width: 100%;
     max-width: 480px;
-    height: 100vh;
     min-height: 100vh;
     padding: 30px 20px 100px 20px;
     box-sizing: border-box;
     text-align: center;
     opacity: 0;
     transition: opacity 0.4s ease-in-out;
-    overflow-y: auto;
-    
-    /* Floral Gold Background with Dark Overlay */
-    background: url('img/Floral-Border-Design-Inspiration-PNG.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
+
 .page.active {
     display: block;
     opacity: 1;
@@ -141,7 +101,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     min-height: 100vh;
     padding-bottom: 30px;
 }
@@ -561,40 +520,8 @@ h1.pname {
 .carousel-nav-btn.next { right: 5px; }
 
 /* ==========================================
-   8. POPUP MODAL & ANIMATIONS
+   8. POPUP MODAL
    ========================================== */
-@keyframes fadeInBackdrop {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes fadeOutBackdrop {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-@keyframes modalPopIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.7) translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-@keyframes modalPopOut {
-    0% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.8) translateY(20px);
-    }
-}
-
 .popup-modal-overlay {
     display: none;
     position: fixed;
@@ -609,30 +536,15 @@ h1.pname {
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    opacity: 0;
 }
 
 .popup-modal-overlay.active {
     display: flex;
-    animation: fadeInBackdrop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.popup-modal-overlay.closing {
-    animation: fadeOutBackdrop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .popup-modal-overlay .aesthetic-card {
     width: 100%;
     max-width: 380px;
-    transform: scale(0.8);
-}
-
-.popup-modal-overlay.active .aesthetic-card {
-    animation: modalPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.popup-modal-overlay.closing .aesthetic-card {
-    animation: modalPopOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .contact-row-item {
@@ -1116,14 +1028,14 @@ h1.pname {
                 let newLeft = initialLeft + deltaX;
                 let newTop = initialTop + deltaY;
 
-                const navBarHeight = 65; // Height of bottom-nav-container
+const navBarHeight = 65; // Height of bottom-nav-container
 
-                const maxLeft = window.innerWidth - ballContainer.offsetWidth;
-                // Subtract bottom navbar height so the button stops right above the nav bar
-                const maxTop = window.innerHeight - ballContainer.offsetHeight - navBarHeight;
+const maxLeft = window.innerWidth - ballContainer.offsetWidth;
+// Subtract bottom navbar height so the button stops right above the nav bar
+const maxTop = window.innerHeight - ballContainer.offsetHeight - navBarHeight;
 
-                newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
-                newTop = Math.max(10, Math.min(newTop, maxTop - 10));
+newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
+newTop = Math.max(10, Math.min(newTop, maxTop - 10))
 
                 ballContainer.style.left = `${newLeft}px`;
                 ballContainer.style.top = `${newTop}px`;
@@ -1169,28 +1081,13 @@ h1.pname {
         }
 
         function syncGlobalSliders(targetIndex) {
-            const previousIndex = globalActiveIndex;
             globalActiveIndex = targetIndex;
             const percentage = targetIndex * 50;
             const tracks = ['undangan-slider-track', 'info-slider-track', 'rsvp-slider-track', 'contact-slider-track'];
 
             tracks.forEach(t => {
                 const el = document.getElementById(t);
-                if (el) {
-                    el.style.transform = `translateX(-${percentage}%)`;
-                    
-                    // Trigger X-axis slide animation on target active pane content
-                    if (previousIndex !== targetIndex) {
-                        const targetPanes = el.querySelectorAll('.slide-pane');
-                        const activePane = targetPanes[targetIndex];
-                        if (activePane) {
-                            const animClass = targetIndex > previousIndex ? 'slide-pane-anim-right' : 'slide-pane-anim-left';
-                            activePane.classList.remove('slide-pane-anim-right', 'slide-pane-anim-left');
-                            void activePane.offsetWidth; // Reflow reset
-                            activePane.classList.add(animClass);
-                        }
-                    }
-                }
+                if (el) el.style.transform = `translateX(-${percentage}%)`;
             });
 
             ['undangan', 'info', 'rsvp', 'contact'].forEach(type => {
@@ -1242,17 +1139,10 @@ h1.pname {
         function toggleContactPopup(shouldOpen) {
             const modal = document.getElementById('contact-popup-element');
             if (shouldOpen) {
-                modal.classList.remove('closing');
                 modal.classList.add('active');
                 syncGlobalSliders(globalActiveIndex);
             } else {
-                if (modal.classList.contains('active')) {
-                    modal.classList.remove('active');
-                    modal.classList.add('closing');
-                    setTimeout(() => {
-                        modal.classList.remove('closing');
-                    }, 300); // Waits for exit animation duration
-                }
+                modal.classList.remove('active');
             }
         }
 
