@@ -75,17 +75,25 @@ body {
 .page.active .pop-delay-4 { animation-delay: 0.55s; }
 .page.active .pop-delay-5 { animation-delay: 0.7s; }
 
-/* Container untuk memastikan reka bentuk kelihatan seperti aplikasi mudah alih */
+/* Container 480px x 100vh dengan Latar Belakang Floral */
 .page {
     display: none;
     width: 100%;
     max-width: 480px;
+    height: 100vh;
     min-height: 100vh;
     padding: 30px 20px 100px 20px;
     box-sizing: border-box;
     text-align: center;
     opacity: 0;
     transition: opacity 0.4s ease-in-out;
+    overflow-y: auto;
+    
+    /* Floral Border Image Background */
+    background: url('img/Floral-Border-Design-Inspiration-PNG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .page.active {
@@ -101,6 +109,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
     min-height: 100vh;
     padding-bottom: 30px;
 }
@@ -127,7 +136,7 @@ body {
 .mogram2 img {
     width: 200px;
     height: auto;
-    margin-top: 60px;
+    margin-top: 30px;
     margin-bottom: 5px;
     filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.4));
 }
@@ -520,8 +529,42 @@ h1.pname {
 .carousel-nav-btn.next { right: 5px; }
 
 /* ==========================================
-   8. POPUP MODAL
+   8. POPUP MODAL & BOTTOM-RIGHT POP ANIMATIONS
    ========================================== */
+@keyframes fadeInBackdrop {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOutBackdrop {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Pop in from bottom-right corner of the centered 480px container */
+@keyframes contactPopIn {
+    0% {
+        opacity: 0;
+        transform: translate(35%, 50%) scale(0.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+/* Pop out back to bottom-right corner */
+@keyframes contactPopOut {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(35%, 50%) scale(0.1);
+    }
+}
+
 .popup-modal-overlay {
     display: none;
     position: fixed;
@@ -536,15 +579,30 @@ h1.pname {
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
+    opacity: 0;
 }
 
 .popup-modal-overlay.active {
     display: flex;
+    animation: fadeInBackdrop 0.3s ease forwards;
+}
+
+.popup-modal-overlay.closing {
+    animation: fadeOutBackdrop 0.3s ease forwards;
 }
 
 .popup-modal-overlay .aesthetic-card {
     width: 100%;
     max-width: 380px;
+    transform-origin: bottom right; /* Sets animation anchor to bottom-right */
+}
+
+.popup-modal-overlay.active .aesthetic-card {
+    animation: contactPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.popup-modal-overlay.closing .aesthetic-card {
+    animation: contactPopOut 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .contact-row-item {
@@ -898,7 +956,7 @@ h1.pname {
     <!-- CONTACT POPUP MODAL -->
     <div class="popup-modal-overlay" id="contact-popup-element" onclick="toggleContactPopup(false)">
         <div class="aesthetic-card" onclick="event.stopPropagation()">
-            <h2 class="section-title" >Hubungi Kami</h2>
+            <h2 class="section-title">Hubungi Kami</h2>
             <div class="tabs-header">
                 <button class="tab-btn active" id="tab-contact-0" onclick="syncGlobalSliders(0)">Bersanding</button>
                 <button class="tab-btn" id="tab-contact-1" onclick="syncGlobalSliders(1)">Bertandang</button>
@@ -1028,14 +1086,13 @@ h1.pname {
                 let newLeft = initialLeft + deltaX;
                 let newTop = initialTop + deltaY;
 
-const navBarHeight = 65; // Height of bottom-nav-container
+                const navBarHeight = 65; 
 
-const maxLeft = window.innerWidth - ballContainer.offsetWidth;
-// Subtract bottom navbar height so the button stops right above the nav bar
-const maxTop = window.innerHeight - ballContainer.offsetHeight - navBarHeight;
+                const maxLeft = window.innerWidth - ballContainer.offsetWidth;
+                const maxTop = window.innerHeight - ballContainer.offsetHeight - navBarHeight;
 
-newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
-newTop = Math.max(10, Math.min(newTop, maxTop - 10))
+                newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
+                newTop = Math.max(10, Math.min(newTop, maxTop - 10));
 
                 ballContainer.style.left = `${newLeft}px`;
                 ballContainer.style.top = `${newTop}px`;
@@ -1126,7 +1183,7 @@ newTop = Math.max(10, Math.min(newTop, maxTop - 10))
             const targetPage = document.getElementById(pageId);
             if (targetPage) {
                 targetPage.classList.remove('active');
-                void targetPage.offsetWidth; // Reflow reset for animation restart
+                void targetPage.offsetWidth; 
                 targetPage.classList.add('active');
             }
 
@@ -1139,10 +1196,17 @@ newTop = Math.max(10, Math.min(newTop, maxTop - 10))
         function toggleContactPopup(shouldOpen) {
             const modal = document.getElementById('contact-popup-element');
             if (shouldOpen) {
+                modal.classList.remove('closing');
                 modal.classList.add('active');
                 syncGlobalSliders(globalActiveIndex);
             } else {
-                modal.classList.remove('active');
+                if (modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    modal.classList.add('closing');
+                    setTimeout(() => {
+                        modal.classList.remove('closing');
+                    }, 300); 
+                }
             }
         }
 
@@ -1306,27 +1370,22 @@ newTop = Math.max(10, Math.min(newTop, maxTop - 10))
             frames.forEach((frame, idx) => {
                 let offset = idx - activeCarouselIndex;
 
-                // Memastikan kitaran gelung indeks
                 if (offset < -Math.floor(total / 2)) offset += total;
                 if (offset > Math.floor(total / 2)) offset -= total;
 
                 if (offset === 0) {
-                    // Kad Aktif di Tengah
                     frame.style.transform = `translateX(0px) translateZ(100px) rotateY(0deg) scale(1)`;
                     frame.style.opacity = '1';
                     frame.style.zIndex = '10';
                 } else if (offset === -1) {
-                    // Kad di Kiri
                     frame.style.transform = `translateX(-110px) translateZ(-40px) rotateY(35deg) scale(0.85)`;
                     frame.style.opacity = '0.7';
                     frame.style.zIndex = '5';
                 } else if (offset === 1) {
-                    // Kad di Kanan
                     frame.style.transform = `translateX(110px) translateZ(-40px) rotateY(-35deg) scale(0.85)`;
                     frame.style.opacity = '0.7';
                     frame.style.zIndex = '5';
                 } else {
-                    // Kad yang Lebih Jauh
                     const dir = offset > 0 ? 1 : -1;
                     frame.style.transform = `translateX(${dir * 180}px) translateZ(-120px) rotateY(${-dir * 50}deg) scale(0.6)`;
                     frame.style.opacity = '0';
