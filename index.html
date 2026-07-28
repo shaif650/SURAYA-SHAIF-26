@@ -746,8 +746,13 @@ h1.pname {
    ========================================== */
 #floating-music-container {
     position: fixed;
-    top: 545px;
-    right: 20px;
+    /* Keeps top offset, but prevents it from going below screen view on short devices */
+    top: min(545px, calc(100vh - 140px));
+    
+    /* Anchors button inside the centered 480px box on wide screens, 
+       and 20px from screen edge on mobile screens */
+    right: max(20px, calc(50% - 220px));
+    
     width: 60px;
     height: 60px;
     z-index: 9999;
@@ -755,6 +760,7 @@ h1.pname {
     user-select: none;
     cursor: grab;
 }
+
 #floating-music-container:active {
     cursor: grabbing;
 }
