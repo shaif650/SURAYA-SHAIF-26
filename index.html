@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Raja Sehari - Shaifullah & Suraya</title>
-    <!-- FontAwesome & Fonts -->
+    <title>Shaif ❤ Suraya</title>
+    <link rel="icon" id="dynamic-favicon" type="image/png" href="img/logo-black.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600&family=Amiri&display=swap" rel="stylesheet">
 
@@ -741,9 +741,7 @@ h1.pname {
 /* ==========================================
    10. BUTANG MUZIK TERAPUNG
    ========================================== */
-/* ==========================================
-   10. BUTANG MUZIK TERAPUNG
-   ========================================== */
+
 #floating-music-container {
     position: fixed;
     /* Keeps top offset, but prevents it from going below screen view on short devices */
@@ -1105,7 +1103,8 @@ h1.pname {
 
     <!-- SYSTEM JAVASCRIPT LOGIC -->
     <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztqdHA2-j7LQgUsS8VO2MlXH8T0GDIesQorhgtwksxqcDJ1wmsUKHXn6ZvcxppSJeyNA/exec"; 
+       
+       const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztqdHA2-j7LQgUsS8VO2MlXH8T0GDIesQorhgtwksxqcDJ1wmsUKHXn6ZvcxppSJeyNA/exec"; 
 
         let globalActiveIndex = 0;
         let isMusicPlaying = false;
@@ -1740,6 +1739,23 @@ function updateCoverflowLayout() {
 
   animate();
 })();
+
+function updateFaviconForTheme() {
+    const favicon = document.getElementById('dynamic-favicon');
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (isDarkMode) {
+        favicon.href = 'img/logo-white.png';
+    } else {
+        favicon.href = 'img/logo-black.png';
+    }
+}
+
+// Run immediately when page loads
+updateFaviconForTheme();
+
+// Listen for live system theme switches
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFaviconForTheme);
 
         function escapeSpecialHTML(t) {
             const m = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
