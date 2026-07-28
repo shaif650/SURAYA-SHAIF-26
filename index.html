@@ -741,6 +741,9 @@ h1.pname {
 /* ==========================================
    10. BUTANG MUZIK TERAPUNG
    ========================================== */
+/* ==========================================
+   10. BUTANG MUZIK TERAPUNG
+   ========================================== */
 #floating-music-container {
     position: fixed;
     top: 545px;
@@ -752,7 +755,6 @@ h1.pname {
     user-select: none;
     cursor: grab;
 }
-
 #floating-music-container:active {
     cursor: grabbing;
 }
@@ -1138,105 +1140,111 @@ h1.pname {
         }
 
         /* --- LOGIK ASSISTIVETOUCH BALL & MUZIK --- */
-        function initAssistiveTouchMusicBall() {
-            const ballContainer = document.getElementById('floating-music-container');
-            const audio = document.getElementById('wedding-music');
-            
-            let isDragging = false;
-            let startX = 0, startY = 0;
-            let initialLeft = 0, initialTop = 0;
-            let hasMoved = false;
+function initAssistiveTouchMusicBall() {
+    const ballContainer = document.getElementById('floating-music-container');
+    const audio = document.getElementById('wedding-music');
+    
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let initialLeft = 0, initialTop = 0;
+    let hasMoved = false;
 
-            ballContainer.addEventListener('click', () => {
-                if (hasMoved) return;
-                toggleAudioState();
-            });
+    ballContainer.addEventListener('click', () => {
+        if (hasMoved) return;
+        toggleAudioState();
+    });
 
-            function toggleAudioState() {
-                if (isMusicPlaying) {
-                    audio.pause();
-                    isMusicPlaying = false;
-                    updateMusicStateUI(false);
-                } else {
-                    audio.play().then(() => {
-                        isMusicPlaying = true;
-                        updateMusicStateUI(true);
-                    }).catch(e => console.log(e));
-                }
-            }
-
-            const onStart = (e) => {
-                isDragging = true;
-                hasMoved = false;
-                ballContainer.style.transition = 'none';
-
-                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-
-                startX = clientX;
-                startY = clientY;
-
-                const rect = ballContainer.getBoundingClientRect();
-                initialLeft = rect.left;
-                initialTop = rect.top;
-            };
-
-            const onMove = (e) => {
-                if (!isDragging) return;
-
-                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-
-                const deltaX = clientX - startX;
-                const deltaY = clientY - startY;
-
-                if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
-                    hasMoved = true;
-                }
-
-                let newLeft = initialLeft + deltaX;
-                let newTop = initialTop + deltaY;
-
-                const navBarHeight = 65; 
-
-                const maxLeft = window.innerWidth - ballContainer.offsetWidth;
-                const maxTop = window.innerHeight - ballContainer.offsetHeight - navBarHeight;
-
-                newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
-                newTop = Math.max(10, Math.min(newTop, maxTop - 10));
-
-                ballContainer.style.left = `${newLeft}px`;
-                ballContainer.style.top = `${newTop}px`;
-                ballContainer.style.right = 'auto'; 
-            };
-
-            const onEnd = () => {
-                if (!isDragging) return;
-                isDragging = false;
-
-                if (hasMoved) {
-                    ballContainer.style.transition = 'left 0.3s cubic-bezier(0.25, 1, 0.5, 1), top 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
-                    const currentLeft = parseFloat(ballContainer.style.left);
-                    const screenWidth = window.innerWidth;
-                    const ballWidth = ballContainer.offsetWidth;
-
-                    const snapMargin = 15;
-                    if (currentLeft + ballWidth / 2 < screenWidth / 2) {
-                        ballContainer.style.left = `${snapMargin}px`;
-                    } else {
-                        ballContainer.style.left = `${screenWidth - ballWidth - snapMargin}px`;
-                    }
-                }
-            };
-
-            ballContainer.addEventListener('touchstart', onStart, {passive: true});
-            window.addEventListener('touchmove', onMove, {passive: true});
-            window.addEventListener('touchend', onEnd);
-
-            ballContainer.addEventListener('mousedown', onStart);
-            window.addEventListener('mousemove', onMove);
-            window.addEventListener('mouseup', onEnd);
+    function toggleAudioState() {
+        if (isMusicPlaying) {
+            audio.pause();
+            isMusicPlaying = false;
+            updateMusicStateUI(false);
+        } else {
+            audio.play().then(() => {
+                isMusicPlaying = true;
+                updateMusicStateUI(true);
+            }).catch(e => console.log(e));
         }
+    }
+
+    const onStart = (e) => {
+        isDragging = true;
+        hasMoved = false;
+        ballContainer.style.transition = 'none';
+
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+        startX = clientX;
+        startY = clientY;
+
+        const rect = ballContainer.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+    };
+
+    const onMove = (e) => {
+        if (!isDragging) return;
+
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+        const deltaX = clientX - startX;
+        const deltaY = clientY - startY;
+
+        if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+            hasMoved = true;
+        }
+
+        let newLeft = initialLeft + deltaX;
+        let newTop = initialTop + deltaY;
+
+        const navBarHeight = 65; 
+        const maxContainerWidth = 480;
+        const minLeftBoundary = Math.max(0, (window.innerWidth - maxContainerWidth) / 2);
+        const maxLeftBoundary = minLeftBoundary + Math.min(window.innerWidth, maxContainerWidth) - ballContainer.offsetWidth;
+
+        const maxTop = window.innerHeight - ballContainer.offsetHeight - navBarHeight;
+
+        newLeft = Math.max(minLeftBoundary + 10, Math.min(newLeft, maxLeftBoundary - 10));
+        newTop = Math.max(10, Math.min(newTop, maxTop - 10));
+
+        ballContainer.style.left = `${newLeft}px`;
+        ballContainer.style.top = `${newTop}px`;
+        ballContainer.style.transform = 'none';
+        ballContainer.style.right = 'auto'; 
+    };
+
+    const onEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+
+        if (hasMoved) {
+            ballContainer.style.transition = 'left 0.3s cubic-bezier(0.25, 1, 0.5, 1), top 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+            const currentLeft = parseFloat(ballContainer.style.left);
+            
+            const maxContainerWidth = 480;
+            const minLeftBoundary = Math.max(0, (window.innerWidth - maxContainerWidth) / 2);
+            const containerWidth = Math.min(window.innerWidth, maxContainerWidth);
+            const ballWidth = ballContainer.offsetWidth;
+            const snapMargin = 15;
+
+            if ((currentLeft - minLeftBoundary) + ballWidth / 2 < containerWidth / 2) {
+                ballContainer.style.left = `${minLeftBoundary + snapMargin}px`;
+            } else {
+                ballContainer.style.left = `${minLeftBoundary + containerWidth - ballWidth - snapMargin}px`;
+            }
+        }
+    };
+
+    ballContainer.addEventListener('touchstart', onStart, {passive: true});
+    window.addEventListener('touchmove', onMove, {passive: true});
+    window.addEventListener('touchend', onEnd);
+
+    ballContainer.addEventListener('mousedown', onStart);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onEnd);
+}
 
         function updateMusicStateUI(playing) {
             const musicIcon = document.getElementById('music-icon');
