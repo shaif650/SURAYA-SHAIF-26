@@ -789,6 +789,16 @@ h1.pname {
   filter: drop-shadow(0px 0px 6px rgba(226, 192, 117, 0.6));
 }
 
+img {
+    -webkit-touch-callout: none; /* Prevents long-press menu on mobile iOS/Android */
+    -webkit-user-select: none;   /* Safari */
+    -khtml-user-select: none;    /* Konqueror HTML */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version */
+    pointer-events: none;        /* Disables all pointer interaction including right-clicks */
+}
+
 </style>
 </head>
 <body>
@@ -921,11 +931,11 @@ h1.pname {
         <div class="carousel-view pop-anim pop-delay-2" id="3d-gallery-viewport">
             <button class="carousel-nav-btn prev" onclick="moveCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
             <div class="carousel-3d" id="carousel-rotation-core">
-                <div class="carousel-frame"><img src="img/gy1.png"></div>
-                <div class="carousel-frame"><img src="img/gy3.png"></div>
-                <div class="carousel-frame"><img src="img/gy4.png"></div>
-                <div class="carousel-frame"><img src="img/gy5.png"></div>
-                <div class="carousel-frame"><img src="img/gy2.png"></div>
+                <div class="carousel-frame"><img src="img/gy1.jpg"></div>
+                <div class="carousel-frame"><img src="img/gy3.jpg"></div>
+                <div class="carousel-frame"><img src="img/gy4.jpg"></div>
+                <div class="carousel-frame"><img src="img/gy5.jpg"></div>
+                <div class="carousel-frame"><img src="img/gy2.jpg"></div>
 
             </div>
             <button class="carousel-nav-btn next" onclick="moveCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
@@ -970,6 +980,13 @@ h1.pname {
     <!-- SYSTEM JAVASCRIPT LOGIC -->
     <script>
        
+        document.addEventListener('contextmenu', (event) => {
+    if (event.target.tagName === 'IMG') {
+        event.preventDefault();
+    }
+});
+    
+    
        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztqdHA2-j7LQgUsS8VO2MlXH8T0GDIesQorhgtwksxqcDJ1wmsUKHXn6ZvcxppSJeyNA/exec"; 
 
         let isMusicPlaying = false;
