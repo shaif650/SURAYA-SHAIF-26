@@ -11,10 +11,10 @@
 <style>
     
     /* ==========================================
-   1. TETAPAN UTAMA & PEMBULATAN VARIABEL (NAVY BLUE THEME)
+   1. TETAPAN UTAMA & PEMBULATAN VARIABEL (DARK RED MAROON THEME)
    ========================================== */
 :root {
-    --bg-gradient: linear-gradient(135deg, #0a1128 0%, #1c2d5a 50%, #0c1838 100%);
+    --bg-gradient: linear-gradient(135deg, #2b0000 0%, #4a0e17 50%, #1f0005 100%);
     --card-bg: rgba(255, 255, 255, 0.07);
     --card-border: rgba(255, 255, 255, 0.15);
     --gold-primary: #e5c158;
@@ -168,7 +168,7 @@ body {
    ========================================== */
 .btn-elegant {
     background: var(--gold-primary);
-    color: #0a1128;
+    color: #2b0000;
     border: none;
     padding: 12px 35px;
     font-size: 14px;
@@ -204,35 +204,6 @@ body {
 /* ==========================================
    4. SLIDER MASTER & TABS
    ========================================== */
-.tabs-header {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    background: rgba(10, 17, 40, 0.4);
-    padding: 5px;
-    border-radius: 25px;
-}
-
-.tab-btn {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--text-muted);
-    padding: 8px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.tab-btn.active {
-    background: var(--gold-primary);
-    color: #0a1128;
-    font-weight: 600;
-}
-
 .slider-master {
     width: 100%;
     overflow: hidden;
@@ -240,36 +211,14 @@ body {
 
 .slider-track {
     display: flex;
-    width: 200%;
+    width: 100%;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .slide-pane {
-    width: 50%;
+    width: 100%;
     flex-shrink: 0;
     padding: 0 5px;
-}
-
-.indicator-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 15px;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dot.active {
-    background: var(--gold-primary);
-    width: 20px;
-    border-radius: 10px;
 }
 
 /* ==========================================
@@ -348,7 +297,7 @@ h1.pname {
 }
 
 .countdown-box {
-    background: rgba(10, 17, 40, 0.5);
+    background: rgba(43, 0, 0, 0.5);
     border: 1px solid rgba(229, 193, 88, 0.35);
     border-radius: 10px;
     padding: 8px 12px;
@@ -405,7 +354,7 @@ h1.pname {
 
 .btn-map:hover {
     background: var(--gold-primary);
-    color: #0a1128;
+    color: #2b0000;
 }
 
 /* ==========================================
@@ -427,7 +376,7 @@ h1.pname {
 .rsvp-name-input, .rsvp-count-select, #input-wish-name, #input-wish-msg {
     width: 100%;
     padding: 10px 14px;
-    background: rgba(10, 17, 40, 0.5);
+    background: rgba(43, 0, 0, 0.5);
     border: 1px solid var(--card-border);
     border-radius: 10px;
     color: #fff;
@@ -441,7 +390,7 @@ h1.pname {
 }
 
 .rsvp-count-select option {
-    background: #0a1128;
+    background: #2b0000;
     color: #fff;
 }
 
@@ -462,7 +411,7 @@ h1.pname {
 }
 
 .wish-item {
-    background: rgba(10, 17, 40, 0.4);
+    background: rgba(43, 0, 0, 0.4);
     border-left: 3px solid var(--gold-primary);
     padding: 10px;
     border-radius: 0 8px 8px 0;
@@ -515,7 +464,7 @@ h1.pname {
     height: 220px;
     border-radius: 18px;
     overflow: hidden;
-    background: rgba(10, 17, 40, 0.8);
+    background: rgba(43, 0, 0, 0.8);
     border: 1px solid var(--gold-primary);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 
                 0 0 15px rgba(229, 194, 88, 0.11);
@@ -550,7 +499,7 @@ h1.pname {
     transform: translateY(-50%);
     width: 36px;
     height: 36px;
-    background: rgba(10, 17, 40, 0.7);
+    background: rgba(43, 0, 0, 0.7);
     border: 1px solid var(--gold-primary);
     color: var(--gold-primary);
     border-radius: 50%;
@@ -565,7 +514,7 @@ h1.pname {
 
 .carousel-nav-btn:hover {
     background: var(--gold-primary);
-    color: #0a1128;
+    color: #2b0000;
 }
 
 .carousel-nav-btn.prev { left: 5px; }
@@ -615,7 +564,7 @@ h1.pname {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(5, 10, 25, 0.8);
+    background: rgba(25, 0, 5, 0.8);
     backdrop-filter: blur(6px);
     z-index: 999;
     justify-content: center;
@@ -677,7 +626,7 @@ h1.pname {
 /* Updated Gold Filled Phone Button */
 .btn-call-action {
     background: var(--gold-primary);
-    color: #0a1128;
+    color: #2b0000;
     text-decoration: none;
     font-size: 14px;
     width: 36px;
@@ -706,7 +655,7 @@ h1.pname {
     width: 100%;
     max-width: 480px;
     height: 65px;
-    background: rgba(10, 17, 40, 0.92);
+    background: rgba(43, 0, 0, 0.92);
     backdrop-filter: blur(15px);
     border-top: 1px solid var(--card-border);
     display: flex;
@@ -767,7 +716,7 @@ h1.pname {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: rgba(10, 24, 54, 0.88);
+    background: rgba(43, 0, 0, 0.88);
     border: 2px solid var(--gold-primary);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(5px);
@@ -862,7 +811,7 @@ h1.pname {
         <div class="mogram pop-anim pop-delay-2">
             <img src="img/initial logo 2.png" alt="Logo Perkahwinan">
         </div>
-        <div class="couple-names-hero pop-anim pop-delay-3">Suraya Zulkifli<br>&<br>Shaifullah Ahmad</div>
+        <div class="couple-names-hero pop-anim pop-delay-3">Shaifullah Ahmad<br>&<br>Suraya Zulkifli</div>
         <div class="arabic-verse pop-anim pop-delay-4">وَخَلَقۡنَٰكُمۡ أَزۡوَٰجٗا</div>
         <p class="translation-text pop-anim pop-delay-5">"Dan Kami telah menciptakan<br>kamu berpasang-pasangan"<br>— Surah An-Naba' 78:8 —</p>
         <button class="btn-elegant pop-anim pop-delay-5" onclick="initiateInvitationSystem()">Buka Undangan</button>
@@ -872,22 +821,8 @@ h1.pname {
     <div id="undangan-page" class="page">
         <h2 class="section-title pop-anim pop-delay-1">Undangan</h2>
         <div class="aesthetic-card pop-anim pop-delay-2">
-            <div class="tabs-header">
-                <button class="tab-btn active" id="tab-undangan-0" onclick="syncGlobalSliders(0)">Bersanding</button>
-                <button class="tab-btn" id="tab-undangan-1" onclick="syncGlobalSliders(1)">Bertandang</button>
-            </div>
             <div class="slider-master">
-                <div class="slider-track" id="undangan-slider-track">
-                    <!-- Bersanding Content -->
-                    <div class="slide-pane">
-                        <p class="verse2 pop-anim pop-delay-2">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-                        <p class="pname pop-anim pop-delay-3">Normizah Binti Mohamed Nor<br>&<br>Keluarga</p>
-                        <p class="invite-text pop-anim pop-delay-3">Dengan penuh kesyukuran menjemput<br>Dato / Datin / Tuan / Puan / Encik / Cik</p> 
-                        <p class="phrase-text pop-anim pop-delay-4">Ke majlis perkahwinan puteri kami</p>
-                        <h1 class="pname pop-anim pop-delay-4">Nur Halida Suraya<br>Binti Zulkifli</h1>
-                        <p class="phrase-text pop-anim pop-delay-5">dengan pilihan hatinya</p>
-                        <h1 class="pname pop-anim pop-delay-5">Mohamad Shaifullah<br>Bin Ahmad Sharafae</h1>
-                    </div>
+                <div class="slider-track">
                     <!-- Bertandang Content -->
                     <div class="slide-pane">
                         <p class="verse2 pop-anim pop-delay-2">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
@@ -900,10 +835,6 @@ h1.pname {
                     </div>
                 </div>
             </div>
-            <div class="indicator-dots">
-                <div class="dot active" id="dot-undangan-0" onclick="syncGlobalSliders(0)"></div>
-                <div class="dot" id="dot-undangan-1" onclick="syncGlobalSliders(1)"></div>
-            </div>
         </div>
     </div>
 
@@ -911,31 +842,8 @@ h1.pname {
     <div id="info-page" class="page">
         <h2 class="section-title pop-anim pop-delay-1">Butiran Majlis</h2>
         <div class="aesthetic-card pop-anim pop-delay-2">
-            <div class="tabs-header">
-                <button class="tab-btn active" id="tab-info-0" onclick="syncGlobalSliders(0)">Bersanding</button>
-                <button class="tab-btn" id="tab-info-1" onclick="syncGlobalSliders(1)">Bertandang</button>
-            </div>
             <div class="slider-master">
-                <div class="slider-track" id="info-slider-track">
-                    <!-- Info Bersanding -->
-                    <div class="slide-pane info-pane">
-                        <div class="countdown-container" id="countdown-bersanding">
-                            <div class="countdown-box"><span class="countdown-val" id="days-s">00</span><span class="countdown-lbl">Hari</span></div>
-                            <div class="countdown-box"><span class="countdown-val" id="hours-s">00</span><span class="countdown-lbl">Jam</span></div>
-                            <div class="countdown-box"><span class="countdown-val" id="screens-s">00</span><span class="countdown-lbl">Min</span></div>
-                            <div class="countdown-box"><span class="countdown-val" id="secs-s">00</span><span class="countdown-lbl">Saat</span></div>
-                        </div>
-                        <h3 class="pop-anim pop-delay-3">Tarikh Majlis</h3>
-                        <p class="pop-anim pop-delay-3">Sabtu, 29 Ogos 2026<br><span style="color:var(--text-muted)">16 Rabiulawal 1448</span></p>
-                        <h3 class="pop-anim pop-delay-4">Aturcara Majlis</h3>
-                        <p class="pop-anim pop-delay-4">12:00 PM - 5:00 PM<br>(Bersanding: 1:00 PM)</p>
-                        <h3 class="pop-anim pop-delay-5">Lokasi</h3>
-                        <p class="pop-anim pop-delay-5">LOT 525, Kg Pohon Buloh,<br>Pasir Mas, Kelantan.</p>
-                        <div class="map-grid pop-anim pop-delay-5">
-                            <a href="https://maps.app.goo.gl/DYvHUNfLDcpvj2Eb7" target="_blank" class="btn-map"><i class="fab fa-google"></i> Google</a>
-                            <a href="https://waze.com/ul/hw30defr1n" target="_blank" class="btn-map"><i class="fab fa-waze"></i> Waze</a>
-                        </div>
-                    </div>
+                <div class="slider-track">
                     <!-- Info Bertandang -->
                     <div class="slide-pane info-pane">
                         <div class="countdown-container" id="countdown-bertandang">
@@ -955,12 +863,7 @@ h1.pname {
                             <a href="https://waze.com/ul/hw0zkx8byf" target="_blank" class="btn-map"><i class="fab fa-waze"></i> Waze</a>
                         </div>
                     </div>
-                   
                 </div>
-            </div>
-            <div class="indicator-dots">
-                <div class="dot active" id="dot-info-0" onclick="syncGlobalSliders(0)"></div>
-                <div class="dot" id="dot-info-1" onclick="syncGlobalSliders(1)"></div>
             </div>
         </div>
 <div class="peringatan-box pop-anim pop-delay-6">
@@ -975,32 +878,8 @@ h1.pname {
     <div id="rsvp-page" class="page">
         <h2 class="section-title pop-anim pop-delay-1">Kehadiran</h2>
         <div class="aesthetic-card pop-anim pop-delay-2">
-            <div class="tabs-header">
-                <button class="tab-btn active" id="tab-rsvp-0" onclick="syncGlobalSliders(0)">Bersanding</button>
-                <button class="tab-btn" id="tab-rsvp-1" onclick="syncGlobalSliders(1)">Bertandang</button>
-            </div>
             <div class="slider-master">
-                <div class="slider-track" id="rsvp-slider-track">
-                    <!-- Form Bersanding -->
-                    <div class="slide-pane">
-                        <form onsubmit="executeRsvpSubmission(event, 'Bersanding')">
-                            <div class="form-group">
-                                <label>Nama Penuh</label>
-                                <input type="text" class="rsvp-name-input" required placeholder="Sila masukkan nama anda">
-                            </div>
-                            <div class="form-group">
-                                <label>Jumlah Kehadiran</label>
-                                <select class="rsvp-count-select" required>
-                                    <option value="1">1 Orang</option>
-                                    <option value="2">2 Orang</option>
-                                    <option value="3">3 Orang</option>
-                                    <option value="4">4 Orang</option>
-                                    <option value="5">5 Orang</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn-elegant" style="width:100%">Hantar Pengesahan</button>
-                        </form>
-                    </div>
+                <div class="slider-track">
                     <!-- Form Bertandang -->
                     <div class="slide-pane">
                         <form onsubmit="executeRsvpSubmission(event, 'Bertandang')">
@@ -1022,10 +901,6 @@ h1.pname {
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="indicator-dots">
-                <div class="dot active" id="dot-rsvp-0" onclick="syncGlobalSliders(0)"></div>
-                <div class="dot" id="dot-rsvp-1" onclick="syncGlobalSliders(1)"></div>
             </div>
         </div>
         
@@ -1074,19 +949,10 @@ h1.pname {
     <div class="popup-modal-overlay" id="contact-popup-element" onclick="toggleContactPopup(false)">
         <div class="aesthetic-card" onclick="event.stopPropagation()">
             <h2 class="section-title">Hubungi Kami</h2>
-            <div class="tabs-header">
-                <button class="tab-btn active" id="tab-contact-0" onclick="syncGlobalSliders(0)">Bersanding</button>
-                <button class="tab-btn" id="tab-contact-1" onclick="syncGlobalSliders(1)">Bertandang</button>
-            </div>
             <div class="slider-master">
-                <div class="slider-track" id="contact-slider-track">
-                    <div class="slide-pane" id="contact-list-bersanding"></div>
+                <div class="slider-track">
                     <div class="slide-pane" id="contact-list-bertandang"></div>
                 </div>
-            </div>
-            <div class="indicator-dots">
-                <div class="dot active" id="dot-contact-0" onclick="syncGlobalSliders(0)"></div>
-                <div class="dot" id="dot-contact-1" onclick="syncGlobalSliders(1)"></div>
             </div>
             <button class="btn-elegant" style="padding:8px 20px; font-size:11px; margin-top:20px;" onclick="toggleContactPopup(false)">Tutup</button>
         </div>
@@ -1106,15 +972,9 @@ h1.pname {
        
        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztqdHA2-j7LQgUsS8VO2MlXH8T0GDIesQorhgtwksxqcDJ1wmsUKHXn6ZvcxppSJeyNA/exec"; 
 
-        let globalActiveIndex = 0;
         let isMusicPlaying = false;
         let activeCarouselIndex = 0;
 
-        const dataBersandingContacts = [
-            { name: "Pn. Normizah", phone: "0129543925" },
-            { name: "En. Asmawi", phone: "0126641202" },
-            { name: "Pn. Norhasliza", phone: "0163670277" }
-        ];
         const dataBertandangContacts = [
             { name: "En. Sharafae", phone: "0193044161" },
             { name: "Pn. Jamelah", phone: "01111059133" },
@@ -1140,7 +1000,6 @@ h1.pname {
             renderContactLists();
             fetchLiveWishes(); 
             initializeThreeDCarouselEngine();
-            initializeSwipeGesturesForSliders();
             startCountdownTimers();
         }
 
@@ -1261,46 +1120,6 @@ function initAssistiveTouchMusicBall() {
             }
         }
 
-        function syncGlobalSliders(targetIndex) {
-            globalActiveIndex = targetIndex;
-            const percentage = targetIndex * 50;
-            const tracks = ['undangan-slider-track', 'info-slider-track', 'rsvp-slider-track', 'contact-slider-track'];
-
-            tracks.forEach(t => {
-                const el = document.getElementById(t);
-                if (el) el.style.transform = `translateX(-${percentage}%)`;
-            });
-
-            ['undangan', 'info', 'rsvp', 'contact'].forEach(type => {
-                const t0 = document.getElementById(`tab-${type}-0`);
-                const t1 = document.getElementById(`tab-${type}-1`);
-                if (t0 && t1) {
-                    t0.classList.toggle('active', targetIndex === 0);
-                    t1.classList.toggle('active', targetIndex === 1);
-                }
-                const d0 = document.getElementById(`dot-${type}-0`);
-                const d1 = document.getElementById(`dot-${type}-1`);
-                if (d0 && d1) {
-                    d0.classList.toggle('active', targetIndex === 0);
-                    d1.classList.toggle('active', targetIndex === 1);
-                }
-            });
-        }
-
-        function initializeSwipeGesturesForSliders() {
-            ['undangan-page', 'info-page', 'rsvp-page', 'contact-popup-element'].forEach(id => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                let startX = 0;
-                el.addEventListener('touchstart', e => { startX = e.changedTouches[0].screenX; }, {passive:true});
-                el.addEventListener('touchend', e => {
-                    let endX = e.changedTouches[0].screenX;
-                    if (startX - endX > 60 && globalActiveIndex === 0) syncGlobalSliders(1);
-                    else if (endX - startX > 60 && globalActiveIndex === 1) syncGlobalSliders(0);
-                }, {passive:true});
-            });
-        }
-
         function switchMainPage(pageId, elementNavRef) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             
@@ -1323,7 +1142,6 @@ function initAssistiveTouchMusicBall() {
             if (shouldOpen) {
                 modal.classList.remove('closing');
                 modal.classList.add('active');
-                syncGlobalSliders(globalActiveIndex);
             } else {
                 if (modal.classList.contains('active')) {
                     modal.classList.add('closing');
@@ -1348,21 +1166,13 @@ function initAssistiveTouchMusicBall() {
                     </div>
                 `).join('');
             };
-            inject('contact-list-bersanding', dataBersandingContacts);
             inject('contact-list-bertandang', dataBertandangContacts);
         }
 
         function startCountdownTimers() {
-            const dates = { sanding: new Date("Aug 29, 2026 12:00:00").getTime(), tandang: new Date("Oct 24, 2026 11:00:00").getTime() };
+            const dates = { tandang: new Date("Oct 24, 2026 11:00:00").getTime() };
             setInterval(() => {
                 const now = new Date().getTime();
-                let diffS = dates.sanding - now;
-                if (diffS > 0) {
-                    document.getElementById('days-s').innerText = String(Math.floor(diffS / (1000 * 60 * 60 * 24))).padStart(2, '0');
-                    document.getElementById('hours-s').innerText = String(Math.floor((diffS % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-                    document.getElementById('screens-s').innerText = String(Math.floor((diffS % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-                    document.getElementById('secs-s').innerText = String(Math.floor((diffS % (1000 * 60)) / 1000)).padStart(2, '0');
-                }
                 let diffT = dates.tandang - now;
                 if (diffT > 0) {
                     document.getElementById('days-t').innerText = String(Math.floor(diffT / (1000 * 60 * 60 * 24))).padStart(2, '0');
